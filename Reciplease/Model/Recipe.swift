@@ -1,64 +1,69 @@
 //
-//  Recipe.swift
+//  recipe2.swift
 //  Reciplease
 //
-//  Created by Alexandre Goncalves on 21/01/2020.
+//  Created by Alexandre Goncalves on 04/02/2020.
 //  Copyright © 2020 Alexandre Goncalves. All rights reserved.
 //
 
 import Foundation
 
+// MARK: - HITS
 struct Hits: Codable {
-    var query: String?
-    var from: Int?
-    var to: Int?
-    var params: [String:String]?
-    var count: Int?
-    var more: Bool?
-    var hits: [Hit]?
+    let q: String?
+    let from, to: Int?
+    let more: Bool?
+    let count: Int?
+    let hits: [Hit]?
 }
 
+// MARK: - Hit
 struct Hit: Codable {
-    var recipe: Recipe?
-    var bookmarked: Bool?
-    var bought: Bool?
+    let recipe: Recipe?
+    let bookmarked, bought: Bool?
 }
 
+// MARK: - Recipe
 struct Recipe: Codable {
-    var uri: String?
-    var label: String?
-    var image: String?
-    var source: String?
-    var url: String?
-    var yields: Int?
-    var calories: Double?
-    var totalWeight: Double?
-    var ingredients: [Ingredient]?
-    var totalNutrients: [NutrientInfo]?
-    var totalDaily: [NutrientInfo]?
+    let uri: String?
+    let label: String?
+    let image: String?
+    let source: String?
+    let url: String?
+    let shareAs: String?
+    let yield: Int?
+    let dietLabels, healthLabels, cautions, ingredientLines: [String]?
+    let ingredients: [Ingredient]?
+    let calories, totalWeight: Double?
+    let totalTime: Int?
+    let totalNutrients, totalDaily: [String: Total]?
+    let digest: [Digest]?
 }
 
+// MARK: - Digest
+struct Digest: Codable {
+    let label, tag: String?
+    let schemaOrgTag: String?
+    let total: Double?
+    let hasRdi: Bool?
+    let daily: Double?
+    let sub: [Digest]?
+    
+    enum CodingKeys: String, CodingKey {
+        case label, tag, schemaOrgTag, total
+        case hasRdi = "hasRDI"
+        case daily, sub
+    }
+}
+
+// MARK: - Ingredient
 struct Ingredient: Codable {
-    var foodId: String?
-    var quantity: Double?
-    var measure: Measure?
-    var weight: Double?
-    var food: Food?
+    let text: String?
+    let weight: Double?
 }
 
-struct Measure: Codable {
-    var uri: String?
-    var label: String?
-}
-
-struct Food: Codable {
-    var foodId: String?
-    var label: String?
-}
-
-struct NutrientInfo: Codable {
-    var uri: String?
-    var label: String?
-    var quantity: Double?
-    var unit: String?
+// MARK: - Total
+struct Total: Codable {
+    let label: String?
+    let quantity: Double?
 }
