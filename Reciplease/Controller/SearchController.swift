@@ -14,7 +14,6 @@ class SearchController: UIViewController {
     @IBOutlet weak var list: UITextView!
     
     private var arrayList: [String] = []
-    private var hits: Hits?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +21,10 @@ class SearchController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "searchResultSegue" {
+            let destVC: ResultController = segue.destination as! ResultController
+            destVC.arrayList = arrayList
+        }
     }
 
     @IBAction func addToList(_ sender: Any) {
@@ -31,19 +33,6 @@ class SearchController: UIViewController {
         arrayList.append(item)
         listTF.text = ""
     }
-    
-    @IBAction func launchRequest(_ sender: Any) {
-        RecipeManager().launchRequest(foodList: arrayList) { (recipe, success) in
-            if success {
-                self.hits = recipe
-                debugPrint(recipe?.hits?.count ?? 0)
-            } else {
-                debugPrint("Ca marche pas")
-            }
-        }
-    }
-    
-    
 }
 
 extension SearchController: UITextFieldDelegate {

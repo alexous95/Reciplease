@@ -11,7 +11,8 @@ import Alamofire
 
 final class RecipeManager {
     
-    typealias handler = (Hits?, Bool) -> ()
+    typealias recipeHandler = (Hits?, Bool) -> ()
+    typealias dataHandler = (Data?, Bool) -> ()
     
     private func createUrl(foodList: [String]) -> URL {
         let baseUrl = "https://api.edamam.com/search?q="
@@ -23,7 +24,7 @@ final class RecipeManager {
         return url
     }
     
-    func launchRequest(foodList: [String], completion: @escaping handler ) {
+    func launchRequest(foodList: [String], completion: @escaping recipeHandler) {
         let url = createUrl(foodList: foodList)
         
         // We use the alamofire request methode to get our information
@@ -32,6 +33,19 @@ final class RecipeManager {
         // The AFDataResponse<Hits> match the type of the model we want to use to decode our response
         
         AF.request(url, method: .get).validate().responseDecodable { (response: AFDataResponse<Hits>) in
+            guard let newResponse = try? response.result.get() else {
+                print(response.error?.errorDescription as Any)
+                completion(nil, false)
+                return
+            }
+            completion(newResponse, true)
+        }
+    }
+    
+    func getImage(from url: String, completion: @escaping dataHandler) {
+        guard let url = URL(string: url) else { return }
+        
+        AF.request(url, method: .get).validate().responseData { response in
             guard let newResponse = try? response.result.get() else {
                 print(response.error?.errorDescription as Any)
                 completion(nil, false)

@@ -20,7 +20,6 @@ struct Hits: Codable {
 // MARK: - Hit
 struct Hit: Codable {
     let recipe: Recipe?
-    let bookmarked, bought: Bool?
 }
 
 // MARK: - Recipe
