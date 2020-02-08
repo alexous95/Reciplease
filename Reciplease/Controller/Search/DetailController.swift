@@ -14,9 +14,15 @@ class DetailController: UIViewController {
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var recipeIngredients: UITextView!
     
-    
     var recipe: Recipe?
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "directionsSegue" {
+            let destVC: DirectionsController = segue.destination as! DirectionsController
+            guard let recipe = recipe else { return }
+            destVC.directions = recipe.ingredientLines
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -44,5 +50,9 @@ class DetailController: UIViewController {
             guard let ingredient = ingredients.text else { return }
             recipeIngredients.text += "- " + ingredient + "\n"
         }
+    }
+    
+    @IBAction func makeFavorite() {
+        
     }
 }

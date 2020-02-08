@@ -12,6 +12,7 @@ class SearchController: UIViewController {
 
     @IBOutlet weak var listTF: UITextField!
     @IBOutlet weak var list: UITextView!
+    @IBOutlet weak var clearButton: UIButton!
     
     private var arrayList: [String] = []
     
@@ -32,6 +33,11 @@ class SearchController: UIViewController {
         list.text += item + "\n"
         arrayList.append(item)
         listTF.text = ""
+    }
+    
+    @IBAction func clearList(_ sender: Any) {
+        list.text = ""
+        arrayList.removeAll()
     }
 }
 

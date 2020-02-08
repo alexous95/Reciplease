@@ -11,6 +11,8 @@
 		FA256F5A23E96A37000EB773 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5923E96A37000EB773 /* APIKey.swift */; };
 		FA256F5C23E9BD17000EB773 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5B23E9BD17000EB773 /* SearchController.swift */; };
 		FA256F5E23E9CA65000EB773 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5D23E9CA65000EB773 /* Recipe.swift */; };
+		FA38647723EEC7DF0022B16F /* DirectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA38647623EEC7DF0022B16F /* DirectionsController.swift */; };
+		FA38647B23EEF7A30022B16F /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA38647A23EEF7A30022B16F /* FavoriteController.swift */; };
 		FA39CC5723E86375005CEDE0 /* RecipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39CC5623E86375005CEDE0 /* RecipeManager.swift */; };
 		FA6F4C9A23D72F77008954DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F4C9923D72F77008954DB /* AppDelegate.swift */; };
 		FA6F4C9C23D72F77008954DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F4C9B23D72F77008954DB /* SceneDelegate.swift */; };
@@ -41,6 +43,8 @@
 		FA256F5923E96A37000EB773 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		FA256F5B23E9BD17000EB773 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		FA256F5D23E9CA65000EB773 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		FA38647623EEC7DF0022B16F /* DirectionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsController.swift; sourceTree = "<group>"; };
+		FA38647A23EEF7A30022B16F /* FavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
 		FA39CC5623E86375005CEDE0 /* RecipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManager.swift; sourceTree = "<group>"; };
 		FA6F4C9623D72F77008954DB /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6F4C9923D72F77008954DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FA38647823EEF7290022B16F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				FA256F5B23E9BD17000EB773 /* SearchController.swift */,
+				FAD1312023EC06E400E55A04 /* ResultController.swift */,
+				FAA0EF9223ED49F500497E67 /* DetailController.swift */,
+				FA38647623EEC7DF0022B16F /* DirectionsController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		FA38647923EEF73B0022B16F /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				FA38647A23EEF7A30022B16F /* FavoriteController.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
 		FA6F4C8D23D72F76008954DB = {
 			isa = PBXGroup;
 			children = (
@@ -138,9 +161,8 @@
 		FA6F4CBE23D73336008954DB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FA256F5B23E9BD17000EB773 /* SearchController.swift */,
-				FAD1312023EC06E400E55A04 /* ResultController.swift */,
-				FAA0EF9223ED49F500497E67 /* DetailController.swift */,
+				FA38647923EEF73B0022B16F /* Favorite */,
+				FA38647823EEF7290022B16F /* Search */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -327,6 +349,8 @@
 				FA6F4C9A23D72F77008954DB /* AppDelegate.swift in Sources */,
 				FAD1312123EC06E400E55A04 /* ResultController.swift in Sources */,
 				FAD1312323EC175000E55A04 /* ResultCell.swift in Sources */,
+				FA38647723EEC7DF0022B16F /* DirectionsController.swift in Sources */,
+				FA38647B23EEF7A30022B16F /* FavoriteController.swift in Sources */,
 				FA256F5C23E9BD17000EB773 /* SearchController.swift in Sources */,
 				FA6F4C9C23D72F77008954DB /* SceneDelegate.swift in Sources */,
 				FAA0EF9323ED49F500497E67 /* DetailController.swift in Sources */,
