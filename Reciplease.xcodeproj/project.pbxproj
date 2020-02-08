@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0A05D6BF5B8E3EF2A64EBB5D /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F48FF77C8845F733CB1E3B /* Pods_Reciplease.framework */; };
+		FA05066123EF06AD00AAB4B9 /* RecipeBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA05066023EF06AD00AAB4B9 /* RecipeBook.swift */; };
+		FA05066323EF06D900AAB4B9 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA05066223EF06D900AAB4B9 /* Ingredients.swift */; };
+		FA05066723EF22EB00AAB4B9 /* DetailFavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA05066623EF22EB00AAB4B9 /* DetailFavoriteController.swift */; };
 		FA256F5A23E96A37000EB773 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5923E96A37000EB773 /* APIKey.swift */; };
 		FA256F5C23E9BD17000EB773 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5B23E9BD17000EB773 /* SearchController.swift */; };
 		FA256F5E23E9CA65000EB773 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5D23E9CA65000EB773 /* Recipe.swift */; };
@@ -40,6 +43,9 @@
 		12F48FF77C8845F733CB1E3B /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9463D2699405FCBAEFC565B2 /* Pods-Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
 		F70E68C94E2F5F11C7B6A9B3 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
+		FA05066023EF06AD00AAB4B9 /* RecipeBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBook.swift; sourceTree = "<group>"; };
+		FA05066223EF06D900AAB4B9 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
+		FA05066623EF22EB00AAB4B9 /* DetailFavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFavoriteController.swift; sourceTree = "<group>"; };
 		FA256F5923E96A37000EB773 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		FA256F5B23E9BD17000EB773 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		FA256F5D23E9CA65000EB773 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				FA38647A23EEF7A30022B16F /* FavoriteController.swift */,
+				FA05066623EF22EB00AAB4B9 /* DetailFavoriteController.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -183,6 +190,8 @@
 				FA6F4CA223D72F77008954DB /* Reciplease.xcdatamodeld */,
 				FA39CC5623E86375005CEDE0 /* RecipeManager.swift */,
 				FA256F5D23E9CA65000EB773 /* Recipe.swift */,
+				FA05066023EF06AD00AAB4B9 /* RecipeBook.swift */,
+				FA05066223EF06D900AAB4B9 /* Ingredients.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,9 +352,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA05066323EF06D900AAB4B9 /* Ingredients.swift in Sources */,
 				FA6F4CA423D72F77008954DB /* Reciplease.xcdatamodeld in Sources */,
+				FA05066123EF06AD00AAB4B9 /* RecipeBook.swift in Sources */,
 				FA39CC5723E86375005CEDE0 /* RecipeManager.swift in Sources */,
 				FA256F5E23E9CA65000EB773 /* Recipe.swift in Sources */,
+				FA05066723EF22EB00AAB4B9 /* DetailFavoriteController.swift in Sources */,
 				FA6F4C9A23D72F77008954DB /* AppDelegate.swift in Sources */,
 				FAD1312123EC06E400E55A04 /* ResultController.swift in Sources */,
 				FAD1312323EC175000E55A04 /* ResultCell.swift in Sources */,

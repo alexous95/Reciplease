@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Ingredients" representedClassName=".Ingredients" syncable="YES" codeGenerationType="category">
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="belongingRecipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeBook" inverseName="listIngredients" inverseEntity="RecipeBook"/>
+    </entity>
+    <entity name="RecipeBook" representedClassName=".RecipeBook" syncable="YES" codeGenerationType="category">
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="totalTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="listIngredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredients" inverseName="belongingRecipe" inverseEntity="Ingredients"/>
+    </entity>
+    <elements>
+        <element name="RecipeBook" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Ingredients" positionX="256.4453125" positionY="106.19921875" width="128" height="88"/>
+    </elements>
 </model>

@@ -9,10 +9,10 @@
 import UIKit
 
 class ResultCell: UITableViewCell {
-
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var recipeIngredients: UILabel!
+    
+    @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var cellTitle: UILabel!
+    @IBOutlet weak var cellIngredients: UILabel!
     @IBOutlet weak var activityWheel: UIActivityIndicatorView!
     
     func configure(title: String, ingredients: [Ingredient], image: String){
@@ -28,12 +28,35 @@ class ResultCell: UITableViewCell {
         RecipeManager().getImage(from: image) { (data, success) in
             if success {
                 guard let data = data else { return }
-                self.recipeImage.image = UIImage(data: data)
+                self.cellImage.image = UIImage(data: data)
                 self.activityWheel.stopAnimating()
                 self.activityWheel.isHidden = true
             }
         }
-        recipeTitle.text = title
-        recipeIngredients.text = ingredientArray.joined(separator: ",")
+        cellTitle.text = title
+        cellIngredients.text = ingredientArray.joined(separator: ",")
     }
+    
+    func configureFromCoreData(title: String, ingredients: [Ingredients], image: String){
+        var ingredientArray = [String]()
+        
+        for ingredient in ingredients {
+            ingredientArray.append(ingredient.text ?? "")
+        }
+        
+        activityWheel.isHidden = false
+        activityWheel.startAnimating()
+        
+        RecipeManager().getImage(from: image) { (data, success) in
+            if success {
+                guard let data = data else { return }
+                self.cellImage.image = UIImage(data: data)
+                self.activityWheel.stopAnimating()
+                self.activityWheel.isHidden = true
+            }
+        }
+        cellTitle.text = title
+        cellIngredients.text = ingredientArray.joined(separator: ",")
+    }
+    
 }

@@ -13,8 +13,10 @@ class DetailController: UIViewController {
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var recipeIngredients: UITextView!
+    @IBOutlet weak var favoriteButton: UIBarButtonItem!
     
     var recipe: Recipe?
+    var isFavorite = false
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "directionsSegue" {
@@ -52,7 +54,37 @@ class DetailController: UIViewController {
         }
     }
     
+    private func createIngredientObject(ingredient: Ingredient, recipeBook: RecipeBook ) {
+        let newIngredient = Ingredients(context: AppDelegate.viewContext)
+        newIngredient.text = ingredient.text
+        newIngredient.weight = ingredient.weight ?? 0.0
+        newIngredient.belongingRecipe = recipeBook
+        do {
+            try AppDelegate.viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     @IBAction func makeFavorite() {
+        guard let recipe = recipe else { return }
+        guard let ingredients = recipe.ingredients else { return }
+        let favRecipe = RecipeBook(context: AppDelegate.viewContext)
+        favRecipe.image = recipe.image
+        favRecipe.title = recipe.label
+        for ingredient in ingredients {
+            createIngredientObject(ingredient: ingredient, recipeBook: favRecipe)
+        }
+        do {
+            try AppDelegate.viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
         
+        if isFavorite {
+            favoriteButton.image = UIImage(named: "Unselected")
+        } else {
+            favoriteButton.image = UIImage(named: "Selected")
+        }
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - HITS
-struct Hits: Codable {
+class Hits: Codable {
     let q: String?
     let from, to: Int?
     let more: Bool?
@@ -24,35 +24,13 @@ struct Hit: Codable {
 
 // MARK: - Recipe
 struct Recipe: Codable {
-    let uri: String?
+    
     let label: String?
     let image: String?
-    let source: String?
-    let url: String?
-    let shareAs: String?
-    let yield: Int?
-    let dietLabels, healthLabels, cautions, ingredientLines: [String]?
+    let ingredientLines: [String]?
     let ingredients: [Ingredient]?
     let calories, totalWeight: Double?
     let totalTime: Int?
-    let totalNutrients, totalDaily: [String: Total]?
-    let digest: [Digest]?
-}
-
-// MARK: - Digest
-struct Digest: Codable {
-    let label, tag: String?
-    let schemaOrgTag: String?
-    let total: Double?
-    let hasRdi: Bool?
-    let daily: Double?
-    let sub: [Digest]?
-    
-    enum CodingKeys: String, CodingKey {
-        case label, tag, schemaOrgTag, total
-        case hasRdi = "hasRDI"
-        case daily, sub
-    }
 }
 
 // MARK: - Ingredient
@@ -61,8 +39,3 @@ struct Ingredient: Codable {
     let weight: Double?
 }
 
-// MARK: - Total
-struct Total: Codable {
-    let label: String?
-    let quantity: Double?
-}
