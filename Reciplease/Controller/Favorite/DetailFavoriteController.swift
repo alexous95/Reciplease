@@ -18,10 +18,11 @@ class DetailFavoriteController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        loadRecipe()
+        setupBackground()
     }
     
-    private func setup() {
+    private func loadRecipe() {
         guard let recipe = recipe else { return }
         guard let imageUrl = recipe.image else { return }
         let ingredients = Ingredients.ingredientsForRecipe(recipe)
@@ -43,5 +44,15 @@ class DetailFavoriteController: UIViewController {
             guard let ingredient = ingredients.text else { return }
             favIngredients.text += "- " + ingredient + "\n"
         }
+    }
+    
+    private func setupBackground() {
+        guard let startColor = UIColor(named: "StartBackground") else { return }
+        guard let endColor = UIColor(named: "EndBackground") else { return }
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = view.bounds
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
     }
 }

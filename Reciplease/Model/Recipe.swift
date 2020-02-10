@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - HITS
-class Hits: Codable {
+struct Hits: Codable {
     let q: String?
     let from, to: Int?
     let more: Bool?

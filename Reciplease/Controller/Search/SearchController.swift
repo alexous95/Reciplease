@@ -18,6 +18,7 @@ class SearchController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackground()
         listTF.delegate = self
     }
     
@@ -28,9 +29,19 @@ class SearchController: UIViewController {
         }
     }
 
+    private func setupBackground() {
+        guard let startColor = UIColor(named: "StartBackground") else { return }
+        guard let endColor = UIColor(named: "EndBackground") else { return }
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = view.bounds
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
+    }
+    
     @IBAction func addToList(_ sender: Any) {
         guard let item = listTF.text else { return }
-        list.text += item + "\n"
+        list.text += "\t- " + item + "\n"
         arrayList.append(item)
         listTF.text = ""
     }

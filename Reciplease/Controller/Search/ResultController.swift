@@ -17,6 +17,7 @@ class ResultController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackground()
         tableView.delegate = self
         tableView.dataSource = self
         getRecipe()
@@ -39,6 +40,16 @@ class ResultController: UIViewController {
                 debugPrint("Ca marche pas")
             }
         }
+    }
+    
+    private func setupBackground() {
+        guard let startColor = UIColor(named: "StartBackground") else { return }
+        guard let endColor = UIColor(named: "EndBackground") else { return }
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = view.bounds
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
     }
 }
 

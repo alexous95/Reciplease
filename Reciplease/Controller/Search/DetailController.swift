@@ -27,6 +27,7 @@ class DetailController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackground()
         setup()
     }
     
@@ -86,5 +87,15 @@ class DetailController: UIViewController {
         } else {
             favoriteButton.image = UIImage(named: "Selected")
         }
+    }
+    
+    private func setupBackground() {
+        guard let startColor = UIColor(named: "StartBackground") else { return }
+        guard let endColor = UIColor(named: "EndBackground") else { return }
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = view.bounds
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
     }
 }
