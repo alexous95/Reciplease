@@ -10,15 +10,22 @@ import UIKit
 
 class SearchController: UIViewController {
 
+    // MARK: - Outlets
+    
     @IBOutlet weak var listTF: UITextField!
     @IBOutlet weak var list: UITextView!
     @IBOutlet weak var clearButton: UIButton!
     
+    // MARK: - Variables
+    
     private var arrayList: [String] = []
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
+        setupBorder()
         listTF.delegate = self
     }
     
@@ -29,6 +36,9 @@ class SearchController: UIViewController {
         }
     }
 
+    // MARK: - Private
+    
+    /// Setup for the background view
     private func setupBackground() {
         guard let startColor = UIColor(named: "StartBackground") else { return }
         guard let endColor = UIColor(named: "EndBackground") else { return }
@@ -39,6 +49,15 @@ class SearchController: UIViewController {
         view.layer.insertSublayer(gradient, at: 0)
     }
     
+    private func setupBorder() {
+        listTF.layer.borderWidth = 1.0
+        listTF.layer.borderColor = UIColor.white.cgColor
+    }
+    
+    // MARK: - Action
+    
+    /// Add ingredients query to an array and a textview
+    /// - Parameter sender: In this case it's a UIButton
     @IBAction func addToList(_ sender: Any) {
         guard let item = listTF.text else { return }
         list.text += "\t- " + item + "\n"
@@ -46,11 +65,15 @@ class SearchController: UIViewController {
         listTF.text = ""
     }
     
+    /// Remove all ingredients from the text view and the array
+    /// - Parameter sender: In this case it's a UIButton
     @IBAction func clearList(_ sender: Any) {
         list.text = ""
         arrayList.removeAll()
     }
 }
+
+// MARK: - Extension
 
 extension SearchController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

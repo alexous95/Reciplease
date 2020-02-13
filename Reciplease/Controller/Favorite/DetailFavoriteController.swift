@@ -10,11 +10,17 @@ import UIKit
 
 class DetailFavoriteController: UIViewController {
 
+    // MARK: - Variables
+    
     var recipe: RecipeBook?
+    
+    // MARK: - Outlet
     
     @IBOutlet weak var favImage: UIImageView!
     @IBOutlet weak var favTitle: UILabel!
     @IBOutlet weak var favIngredients: UITextView!
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +28,13 @@ class DetailFavoriteController: UIViewController {
         setupBackground()
     }
     
+    // MARK: - Private
+    
+    /// Load information from the recipe
     private func loadRecipe() {
         guard let recipe = recipe else { return }
         guard let imageUrl = recipe.image else { return }
-        let ingredients = Ingredients.ingredientsForRecipe(recipe)
+        let ingredients = Ingredients.ingredientsFor(recipe: recipe)
         favTitle.text = recipe.title
         
         RecipeManager().getImage(from: imageUrl) { (data, success) in
@@ -39,6 +48,7 @@ class DetailFavoriteController: UIViewController {
         getIngredients(list: ingredients)
     }
     
+    /// Fill the text view with our ingredients
     private func getIngredients(list: [Ingredients]) {
         for ingredients in list {
             guard let ingredient = ingredients.text else { return }
@@ -46,6 +56,7 @@ class DetailFavoriteController: UIViewController {
         }
     }
     
+    /// Setup for the background view
     private func setupBackground() {
         guard let startColor = UIColor(named: "StartBackground") else { return }
         guard let endColor = UIColor(named: "EndBackground") else { return }

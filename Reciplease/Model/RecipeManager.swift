@@ -14,6 +14,8 @@ final class RecipeManager {
     typealias recipeHandler = (Hits?, Bool) -> ()
     typealias dataHandler = (Data?, Bool) -> ()
     
+    // MARK: - Private
+    
     private func createUrl(foodList: [String]) -> URL {
         let baseUrl = "https://api.edamam.com/search?q="
         let parameters = foodList.joined(separator: ",")
@@ -24,6 +26,11 @@ final class RecipeManager {
         return url
     }
     
+    // MARK: - Public
+    
+    /// Launch a request to the edamam API with some parameters
+    /// - Parameter foodList: An array of the ingredient we want in our Recipe
+    /// - Parameter completion: A closure of type (Hits?, Bool) -> () to transmit data
     func launchRequest(foodList: [String], completion: @escaping recipeHandler) {
         let url = createUrl(foodList: foodList)
         
@@ -42,6 +49,9 @@ final class RecipeManager {
         }
     }
     
+    /// Launch a request to the edamam API with some parameters
+    /// - Parameter url: An URL with the adress of our image
+    /// - Parameter completion: A closure of type (Data?, Bool) -> () to transmit data
     func getImage(from url: String, completion: @escaping dataHandler) {
         guard let url = URL(string: url) else { return }
         

@@ -9,28 +9,49 @@
 import UIKit
 
 class DetailController: UIViewController {
-
+    
+    // MARK: - Outlets
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var recipeIngredients: UITextView!
     @IBOutlet weak var favoriteButton: UIBarButtonItem!
     
+    // MARK: - Variables
+    
     var recipe: Recipe?
     var isFavorite = false
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "directionsSegue" {
-            let destVC: DirectionsController = segue.destination as! DirectionsController
-            guard let recipe = recipe else { return }
-            destVC.directions = recipe.ingredientLines
-        }
-    }
+    // MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
         setup()
+        checkFavorite()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "directionSegue" {
+            let destVC: DirectionsController = segue.destination as! DirectionsController
+            guard let recipe = recipe else { return }
+            destVC.directions = recipe.url
+        }
+    }
+    
+    // MARK: - Private
+    
+    /// Setup for the background view
+    private func setupBackground() {
+        guard let startColor = UIColor(named: "StartBackground") else { return }
+        guard let endColor = UIColor(named: "EndBackground") else { return }
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = view.bounds
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    /// Setup the different views
     private func setup() {
         guard let recipe = recipe else { return }
         guard let imageUrl = recipe.image else { return }
@@ -48,6 +69,8 @@ class DetailController: UIViewController {
         getIngredients(list: ingredients)
     }
     
+    /// Fill our TextView with the ingredients of the recipe
+    /// - Parameter list: An array of Ingredient from a recipe
     private func getIngredients(list: [Ingredient]) {
         for ingredients in list {
             guard let ingredient = ingredients.text else { return }
@@ -55,47 +78,50 @@ class DetailController: UIViewController {
         }
     }
     
-    private func createIngredientObject(ingredient: Ingredient, recipeBook: RecipeBook ) {
-        let newIngredient = Ingredients(context: AppDelegate.viewContext)
-        newIngredient.text = ingredient.text
-        newIngredient.weight = ingredient.weight ?? 0.0
-        newIngredient.belongingRecipe = recipeBook
-        do {
-            try AppDelegate.viewContext.save()
-        } catch {
-            print(error.localizedDescription)
+    /// Checks if the recipe is already a favorite and sets the favorite button accordingly
+    private func checkFavorite() {
+        guard let recipe = recipe else { return }
+        guard let uri = recipe.uri else {
+            return
+        }
+        let favorite = RecipeBook.checkFav(uri: uri)
+        
+        if favorite.dup == true {
+            favoriteButton.image = UIImage(named: "Selected")
+            isFavorite = true
+        } else {
+            favoriteButton.image = UIImage(named: "Unselected")
+            isFavorite = false
         }
     }
     
+    // MARK: - Actions
+    
+    /// Saves or removes a recipe from core data depending if it's already a favorite recipe or not
     @IBAction func makeFavorite() {
         guard let recipe = recipe else { return }
-        guard let ingredients = recipe.ingredients else { return }
-        let favRecipe = RecipeBook(context: AppDelegate.viewContext)
-        favRecipe.image = recipe.image
-        favRecipe.title = recipe.label
-        for ingredient in ingredients {
-            createIngredientObject(ingredient: ingredient, recipeBook: favRecipe)
-        }
-        do {
-            try AppDelegate.viewContext.save()
-        } catch {
-            print(error.localizedDescription)
+        guard let uri = recipe.uri else {
+            print("on verra plus tard")
+            return
         }
         
         if isFavorite {
             favoriteButton.image = UIImage(named: "Unselected")
+            let favoriteRecipe = RecipeBook.checkFav(uri: uri)
+            guard let favRecipe = favoriteRecipe.recipe else { return }
+            AppDelegate.viewContext.delete(favRecipe)
+            do {
+                try AppDelegate.viewContext.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+            isFavorite = false
+            
         } else {
+            guard let ingredients = recipe.ingredients else { return }
+            RecipeBook.saveRecipeBook(recipe: recipe, ingredients: ingredients)
             favoriteButton.image = UIImage(named: "Selected")
+            isFavorite = true
         }
-    }
-    
-    private func setupBackground() {
-        guard let startColor = UIColor(named: "StartBackground") else { return }
-        guard let endColor = UIColor(named: "EndBackground") else { return }
-        let gradient = CAGradientLayer()
-        
-        gradient.frame = view.bounds
-        gradient.colors = [startColor.cgColor, endColor.cgColor]
-        view.layer.insertSublayer(gradient, at: 0)
     }
 }

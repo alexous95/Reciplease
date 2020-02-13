@@ -7,37 +7,31 @@
 //
 
 import UIKit
+import WebKit
 
 class DirectionsController: UIViewController {
 
-    var directions: [String]?
+    var directions: String?
     
-    @IBOutlet weak var directionList: UITextView!
+    @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackground()
-        addDirections()
+       loadDirections()
     }
   
-    private func addDirections() {
-        print("on est la")
-        guard let directions = directions else { return }
+    private func loadDirections() {
+        guard let direction = directions else { return }
+        webView.configuration.mediaTypesRequiringUserActionForPlayback = .all
+        webView.configuration.allowsInlineMediaPlayback = false
+        webView.load(direction)
         
-        for direction in directions {
-            print(direction)
-            directionList.text += "-" + direction + "\n"
-        }
     }
     
-    private func setupBackground() {
-        guard let startColor = UIColor(named: "StartBackground") else { return }
-        guard let endColor = UIColor(named: "EndBackground") else { return }
-        let gradient = CAGradientLayer()
-        
-        gradient.frame = view.bounds
-        gradient.colors = [startColor.cgColor, endColor.cgColor]
-        view.layer.insertSublayer(gradient, at: 0)
-    }
+}
 
+extension DirectionsController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        title = webView.title
+    }
 }

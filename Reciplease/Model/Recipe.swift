@@ -24,12 +24,12 @@ struct Hit: Codable {
 
 // MARK: - Recipe
 struct Recipe: Codable {
-    
+    let uri: String?
     let label: String?
     let image: String?
-    let ingredientLines: [String]?
+    let url: String?
     let ingredients: [Ingredient]?
-    let calories, totalWeight: Double?
+    //let calories, totalWeight: Double?
     let totalTime: Int?
 }
 

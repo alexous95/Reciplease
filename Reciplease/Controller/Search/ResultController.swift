@@ -10,10 +10,16 @@ import UIKit
 
 class ResultController: UIViewController {
 
+    // MARK: - Variables
+    
     var hits: Hits?
     var arrayList: [String] = []
     
+    // MARK: - Outlet
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +36,8 @@ class ResultController: UIViewController {
             destVC.recipe = hits?.hits?[indexPath.row].recipe
         }
     }
+    
+    // MARK: - Private
     
     private func getRecipe() {
         RecipeManager().launchRequest(foodList: arrayList) { (recipe, success) in
@@ -52,6 +60,8 @@ class ResultController: UIViewController {
         view.layer.insertSublayer(gradient, at: 0)
     }
 }
+
+// MARK: - Extension
 
 extension ResultController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {

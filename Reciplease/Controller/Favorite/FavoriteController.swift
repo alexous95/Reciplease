@@ -85,7 +85,6 @@ extension FavoriteController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let listIngredient = recipe.listIngredients?.allObjects as! [Ingredients]
-        
         cell.configureFromCoreData(title: title, ingredients: listIngredient, image: image)
         
         return cell
