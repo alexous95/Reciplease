@@ -24,8 +24,7 @@ class ResultController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
-        tableView.delegate = self
-        tableView.dataSource = self
+        setupDelegate()
         getRecipe()
     }
     
@@ -38,6 +37,11 @@ class ResultController: UIViewController {
     }
     
     // MARK: - Private
+    
+    private func setupDelegate() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
     
     private func getRecipe() {
         RecipeManager().launchRequest(foodList: arrayList) { (recipe, success) in
