@@ -27,6 +27,7 @@
 		FA6F4CA923D72F7D008954DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6F4CA723D72F7D008954DB /* LaunchScreen.storyboard */; };
 		FA6F4CB423D72F7E008954DB /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F4CB323D72F7E008954DB /* RecipleaseTests.swift */; };
 		FAA0EF9323ED49F500497E67 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA0EF9223ED49F500497E67 /* DetailController.swift */; };
+		FABCCE5A23F6FCA4008B977B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCCE5923F6FCA4008B977B /* DatabaseManager.swift */; };
 		FAD1312123EC06E400E55A04 /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1312023EC06E400E55A04 /* ResultController.swift */; };
 		FAD1312323EC175000E55A04 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1312223EC175000E55A04 /* ResultCell.swift */; };
 /* End PBXBuildFile section */
@@ -68,6 +69,7 @@
 		FA6F4CB323D72F7E008954DB /* RecipleaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseTests.swift; sourceTree = "<group>"; };
 		FA6F4CB523D72F7E008954DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAA0EF9223ED49F500497E67 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		FABCCE5923F6FCA4008B977B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		FAD1312023EC06E400E55A04 /* ResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
 		FAD1312223EC175000E55A04 /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +209,7 @@
 				FA256F5D23E9CA65000EB773 /* Recipe.swift */,
 				FA05066023EF06AD00AAB4B9 /* RecipeBook.swift */,
 				FA05066223EF06D900AAB4B9 /* Ingredients.swift */,
+				FABCCE5923F6FCA4008B977B /* DatabaseManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				FA6F4CA423D72F77008954DB /* Reciplease.xcdatamodeld in Sources */,
 				FA05066123EF06AD00AAB4B9 /* RecipeBook.swift in Sources */,
 				FA39CC5723E86375005CEDE0 /* RecipeManager.swift in Sources */,
+				FABCCE5A23F6FCA4008B977B /* DatabaseManager.swift in Sources */,
 				FA256F5E23E9CA65000EB773 /* Recipe.swift in Sources */,
 				FA05066723EF22EB00AAB4B9 /* DetailFavoriteController.swift in Sources */,
 				FA6F4C9A23D72F77008954DB /* AppDelegate.swift in Sources */,

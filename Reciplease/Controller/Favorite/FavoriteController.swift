@@ -94,9 +94,9 @@ extension FavoriteController: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             
             // How to remove an object from core data
-            AppDelegate.viewContext.delete(recipes[indexPath.row])
+            DatabaseManager.shared.managedObjectContext().delete(recipes[indexPath.row])
             do {
-                try AppDelegate.viewContext.save()
+                try DatabaseManager.shared.managedObjectContext().save()
             } catch {
                 print(error.localizedDescription)
             }

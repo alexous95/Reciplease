@@ -109,9 +109,9 @@ class DetailController: UIViewController {
             favoriteButton.image = UIImage(named: "Unselected")
             let favoriteRecipe = RecipeBook.checkFav(uri: uri)
             guard let favRecipe = favoriteRecipe.recipe else { return }
-            AppDelegate.viewContext.delete(favRecipe)
+            DatabaseManager.shared.managedObjectContext().delete(favRecipe)
             do {
-                try AppDelegate.viewContext.save()
+                try DatabaseManager.shared.managedObjectContext().save()
             } catch {
                 print(error.localizedDescription)
             }

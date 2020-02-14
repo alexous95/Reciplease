@@ -25,7 +25,7 @@ class Ingredients: NSManagedObject {
         request.predicate = NSPredicate(format: "belongingRecipe.title = %@", recipeTitle)
         request.returnsObjectsAsFaults = false
         
-        guard let ingredients = try? AppDelegate.viewContext.fetch(request) else { return [] }
+        guard let ingredients = try? DatabaseManager.shared.managedObjectContext().fetch(request) else { return [] }
         return ingredients
     }
     
@@ -33,12 +33,12 @@ class Ingredients: NSManagedObject {
     /// - Parameter ingredient: An ingredient from the recipe (use the Recipe object to get the ingredients)
     /// - Parameter recipeBook: The recipeBook object we want to create a relation to ( Links the ingredient to the recipe)
     static func createIngredientObject(ingredient: Ingredient, recipeBook: RecipeBook ) {
-        let newIngredient = Ingredients(context: AppDelegate.viewContext)
+        let newIngredient = Ingredients(context: DatabaseManager.shared.managedObjectContext())
         newIngredient.text = ingredient.text
         newIngredient.weight = ingredient.weight ?? 0.0
         newIngredient.belongingRecipe = recipeBook
         do {
-            try AppDelegate.viewContext.save()
+            try DatabaseManager.shared.managedObjectContext().save()
         } catch {
             print(error.localizedDescription)
         }

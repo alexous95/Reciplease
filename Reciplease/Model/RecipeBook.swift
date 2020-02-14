@@ -14,7 +14,7 @@ class RecipeBook: NSManagedObject {
     /// Returns an array of all the RecipeBook object in core data
     static var all: [RecipeBook] {
         let request: NSFetchRequest<RecipeBook> = RecipeBook.fetchRequest()
-        guard let recipes = try? AppDelegate.viewContext.fetch(request) else { return [] }
+        guard let recipes = try? DatabaseManager.shared.managedObjectContext().fetch(request) else { return [] }
         return recipes
     }
     
@@ -22,7 +22,7 @@ class RecipeBook: NSManagedObject {
     /// - Parameter recipe: A Recipe object from the network request
     /// - Parameter ingredients: An array of ingredient from the recipe
     static func saveRecipeBook(recipe: Recipe, ingredients: [Ingredient]) {
-        let favRecipe = RecipeBook(context: AppDelegate.viewContext)
+        let favRecipe = RecipeBook(context: DatabaseManager.shared.managedObjectContext())
         favRecipe.uri = recipe.uri
         favRecipe.image = recipe.image
         favRecipe.title = recipe.label
@@ -30,7 +30,7 @@ class RecipeBook: NSManagedObject {
             Ingredients.createIngredientObject(ingredient: ingredient, recipeBook: favRecipe)
         }
         do {
-            try AppDelegate.viewContext.save()
+            try DatabaseManager.shared.managedObjectContext().save()
         } catch {
             print(error.localizedDescription)
         }
