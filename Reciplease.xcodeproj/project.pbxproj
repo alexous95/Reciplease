@@ -11,7 +11,6 @@
 		FA05066123EF06AD00AAB4B9 /* RecipeBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA05066023EF06AD00AAB4B9 /* RecipeBook.swift */; };
 		FA05066323EF06D900AAB4B9 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA05066223EF06D900AAB4B9 /* Ingredients.swift */; };
 		FA05066723EF22EB00AAB4B9 /* DetailFavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA05066623EF22EB00AAB4B9 /* DetailFavoriteController.swift */; };
-		FA256F5A23E96A37000EB773 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5923E96A37000EB773 /* APIKey.swift */; };
 		FA256F5C23E9BD17000EB773 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5B23E9BD17000EB773 /* SearchController.swift */; };
 		FA256F5E23E9CA65000EB773 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA256F5D23E9CA65000EB773 /* Recipe.swift */; };
 		FA38647723EEC7DF0022B16F /* DirectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA38647623EEC7DF0022B16F /* DirectionsController.swift */; };
@@ -49,7 +48,6 @@
 		FA05066023EF06AD00AAB4B9 /* RecipeBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBook.swift; sourceTree = "<group>"; };
 		FA05066223EF06D900AAB4B9 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		FA05066623EF22EB00AAB4B9 /* DetailFavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFavoriteController.swift; sourceTree = "<group>"; };
-		FA256F5923E96A37000EB773 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		FA256F5B23E9BD17000EB773 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		FA256F5D23E9CA65000EB773 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		FA38647623EEC7DF0022B16F /* DirectionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsController.swift; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 				FA6F4CA523D72F7D008954DB /* Assets.xcassets */,
 				FA6F4C9B23D72F77008954DB /* SceneDelegate.swift */,
 				FA6F4C9923D72F77008954DB /* AppDelegate.swift */,
-				FA256F5923E96A37000EB773 /* APIKey.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -386,7 +383,6 @@
 				FA256F5C23E9BD17000EB773 /* SearchController.swift in Sources */,
 				FA6F4C9C23D72F77008954DB /* SceneDelegate.swift in Sources */,
 				FAA0EF9323ED49F500497E67 /* DetailController.swift in Sources */,
-				FA256F5A23E96A37000EB773 /* APIKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
