@@ -24,9 +24,11 @@
 		FA6F4CA423D72F77008954DB /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA6F4CA223D72F77008954DB /* Reciplease.xcdatamodeld */; };
 		FA6F4CA623D72F7D008954DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6F4CA523D72F7D008954DB /* Assets.xcassets */; };
 		FA6F4CA923D72F7D008954DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6F4CA723D72F7D008954DB /* LaunchScreen.storyboard */; };
-		FA6F4CB423D72F7E008954DB /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F4CB323D72F7E008954DB /* RecipleaseTests.swift */; };
 		FAA0EF9323ED49F500497E67 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA0EF9223ED49F500497E67 /* DetailController.swift */; };
+		FAAEEEAE23F7642C004A3D02 /* MockDatabasManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEEEAD23F7642C004A3D02 /* MockDatabasManager.swift */; };
+		FAAEEEB023F76550004A3D02 /* CoreDataTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEEEAF23F76550004A3D02 /* CoreDataTestClass.swift */; };
 		FABCCE5A23F6FCA4008B977B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCCE5923F6FCA4008B977B /* DatabaseManager.swift */; };
+		FABCCE5C23F7027E008B977B /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCCE5B23F7027E008B977B /* APIKeys.swift */; };
 		FAD1312123EC06E400E55A04 /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1312023EC06E400E55A04 /* ResultController.swift */; };
 		FAD1312323EC175000E55A04 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1312223EC175000E55A04 /* ResultCell.swift */; };
 /* End PBXBuildFile section */
@@ -64,10 +66,12 @@
 		FA6F4CA823D72F7D008954DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA6F4CAA23D72F7D008954DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA6F4CAF23D72F7E008954DB /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA6F4CB323D72F7E008954DB /* RecipleaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseTests.swift; sourceTree = "<group>"; };
 		FA6F4CB523D72F7E008954DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAA0EF9223ED49F500497E67 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		FAAEEEAD23F7642C004A3D02 /* MockDatabasManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabasManager.swift; sourceTree = "<group>"; };
+		FAAEEEAF23F76550004A3D02 /* CoreDataTestClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTestClass.swift; sourceTree = "<group>"; };
 		FABCCE5923F6FCA4008B977B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		FABCCE5B23F7027E008B977B /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		FAD1312023EC06E400E55A04 /* ResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
 		FAD1312223EC175000E55A04 /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,8 +178,9 @@
 		FA6F4CB223D72F7E008954DB /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				FA6F4CB323D72F7E008954DB /* RecipleaseTests.swift */,
 				FA6F4CB523D72F7E008954DB /* Info.plist */,
+				FAAEEEAD23F7642C004A3D02 /* MockDatabasManager.swift */,
+				FAAEEEAF23F76550004A3D02 /* CoreDataTestClass.swift */,
 			);
 			path = RecipleaseTests;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				FA6F4CA523D72F7D008954DB /* Assets.xcassets */,
 				FA6F4C9B23D72F77008954DB /* SceneDelegate.swift */,
 				FA6F4C9923D72F77008954DB /* AppDelegate.swift */,
+				FABCCE5B23F7027E008B977B /* APIKeys.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -374,6 +380,7 @@
 				FABCCE5A23F6FCA4008B977B /* DatabaseManager.swift in Sources */,
 				FA256F5E23E9CA65000EB773 /* Recipe.swift in Sources */,
 				FA05066723EF22EB00AAB4B9 /* DetailFavoriteController.swift in Sources */,
+				FABCCE5C23F7027E008B977B /* APIKeys.swift in Sources */,
 				FA6F4C9A23D72F77008954DB /* AppDelegate.swift in Sources */,
 				FAD1312123EC06E400E55A04 /* ResultController.swift in Sources */,
 				FAD1312323EC175000E55A04 /* ResultCell.swift in Sources */,
@@ -390,7 +397,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA6F4CB423D72F7E008954DB /* RecipleaseTests.swift in Sources */,
+				FAAEEEAE23F7642C004A3D02 /* MockDatabasManager.swift in Sources */,
+				FAAEEEB023F76550004A3D02 /* CoreDataTestClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

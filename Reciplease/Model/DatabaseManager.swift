@@ -13,7 +13,7 @@ class DatabaseManager {
     
     static let shared = DatabaseManager()
     
-    private init() {}
+    //private init() {}
     
     // MARK: - Database Level Properties
     
@@ -48,5 +48,28 @@ class DatabaseManager {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    /// Saves or Updates the given instance to the database.
+    ///
+    /// If you retrieved a class instance from this class and you edit it's
+    /// attributes and then used this function, then this method will perform
+    /// update.
+    ///
+    /// If you however, requested an empty class instance from this class and you
+    /// added data to it's attributes, then this method will perform insertion.
+    ///
+    /// - Attributes:
+    ///     - instance: The instance to be added/updated.
+    ///
+    /// - Returns: True if the operation was successful, false otherwise.
+    func saveOrUpdate(instance: NSManagedObject) -> Bool {
+        do {
+            try instance.managedObjectContext?.save()
+            return true
+        } catch {
+            fatalError("Failed: \(error)")
+        }
+        return false
     }
 }
