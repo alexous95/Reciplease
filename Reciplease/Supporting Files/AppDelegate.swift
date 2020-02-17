@@ -12,11 +12,20 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    let coreDataStack = CoreDataStack(modelName: "Reciplease")
+    
+    static var mainContext: NSManagedObjectContext {
+        return (UIApplication.shared.delegate as! AppDelegate).coreDataStack.managedContext
+    }
+    
+    static var stack: CoreDataStack {
+        return (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // We use this methode to change the caret's TextField color
         UITextField.appearance().tintColor = UIColor.white
-        
         return true
     }
 

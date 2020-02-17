@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailController: UIViewController {
     
@@ -20,6 +21,9 @@ class DetailController: UIViewController {
     
     var recipe: Recipe?
     var isFavorite = false
+    var managedObjectContext: NSManagedObjectContext?
+    var coreDataStack: CoreDataStack?
+    var recipeService: RecipeService?
     
     // MARK: - View life cycle
     
@@ -28,6 +32,8 @@ class DetailController: UIViewController {
         setupBackground()
         setup()
         checkFavorite()
+        setupCoreDataStack()
+        setupRecipeService()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -39,6 +45,21 @@ class DetailController: UIViewController {
     }
     
     // MARK: - Private
+    
+    private func setupCoreDataStack() {
+        self.managedObjectContext = AppDelegate.mainContext
+        self.coreDataStack = AppDelegate.stack
+    }
+    
+    private func setupRecipeService() {
+        guard let managedObjectContext = self.managedObjectContext,
+            let coreDataStack = self.coreDataStack
+        else {
+            print("la configuration de la stack marche pas")
+            return
+        }
+        recipeService = RecipeService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
+    }
     
     /// Setup for the background view
     private func setupBackground() {
@@ -80,11 +101,12 @@ class DetailController: UIViewController {
     
     /// Checks if the recipe is already a favorite and sets the favorite button accordingly
     private func checkFavorite() {
+        guard let recipeService = recipeService else { return }
         guard let recipe = recipe else { return }
         guard let uri = recipe.uri else {
             return
         }
-        let favorite = RecipeBook.checkFav(uri: uri)
+        let favorite = recipeService.checkFav(uri: uri)
         
         if favorite.dup == true {
             favoriteButton.image = UIImage(named: "Selected")
@@ -99,27 +121,27 @@ class DetailController: UIViewController {
     
     /// Saves or removes a recipe from core data depending if it's already a favorite recipe or not
     @IBAction func makeFavorite() {
+        guard let recipeService = recipeService else { return }
         guard let recipe = recipe else { return }
-        guard let uri = recipe.uri else {
-            print("on verra plus tard")
-            return
-        }
+        guard let uri = recipe.uri else { return }
         
         if isFavorite {
             favoriteButton.image = UIImage(named: "Unselected")
-            let favoriteRecipe = RecipeBook.checkFav(uri: uri)
+            let favoriteRecipe = recipeService.checkFav(uri: uri)
             guard let favRecipe = favoriteRecipe.recipe else { return }
-            DatabaseManager.shared.managedObjectContext().delete(favRecipe)
+            
+            AppDelegate.mainContext.delete(favRecipe)
             do {
-                try DatabaseManager.shared.managedObjectContext().save()
+                try AppDelegate.mainContext.save()
             } catch {
                 print(error.localizedDescription)
             }
+            
             isFavorite = false
             
         } else {
             guard let ingredients = recipe.ingredients else { return }
-            RecipeBook.saveRecipeBook(recipe: recipe, ingredients: ingredients)
+            recipeService.addRecipeBook(recipe: recipe, ingredients: ingredients)
             favoriteButton.image = UIImage(named: "Selected")
             isFavorite = true
         }

@@ -1,36 +1,50 @@
+////
+////  CoreDataTestClass.swift
+////  RecipleaseTests
+////
+////  Created by Alexandre Goncalves on 15/02/2020.
+////  Copyright © 2020 Alexandre Goncalves. All rights reserved.
+////
 //
-//  CoreDataTestClass.swift
-//  RecipleaseTests
+//import XCTest
+//@testable import Reciplease
+//class CoreDataTestClass: XCTestCase {
 //
-//  Created by Alexandre Goncalves on 15/02/2020.
-//  Copyright © 2020 Alexandre Goncalves. All rights reserved.
+//    var coreDataStack: TestCoreDataStack!
+//    var recipeBook: RecipeBook!
+//    
+//    private func fillRecipeBook(recipe: RecipeBook) {
+//        recipe.image = ""
+//        recipe.title = ""
+//        recipe.totalTime = 0
+//        recipe.uri = ""
+//    }
 //
-
-import XCTest
-@testable import Reciplease
-class CoreDataTestClass: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    
-    func testGivenNullDatabase_WhenAddingEntity_ThenDatabaseIsNotNill() {
-        
-        let mockDatabase = MockDatabaseManager()
-        let recipeBook = RecipeBook(context: mockDatabase.managedObjectContext())
-        recipeBook.image = ""
-        recipeBook.title = ""
-        recipeBook.totalTime = 0
-        recipeBook.uri = ""
-        
-        XCTAssertTrue(mockDatabase.saveOrUpdate(instance: recipeBook))
-        
-    }
-
-}
+//    override func setUp() {
+//        coreDataStack = TestCoreDataStack()
+//        recipeBook = RecipeBook(context: coreDataStack.managedObjectContext())
+//
+//    }
+//
+//    override func tearDown() {
+//        // Put teardown code here. This method is called after the invocation of each test method in the class.
+//    }
+//
+//
+//    func testGivenNullDatabase_WhenAddingEntity_ThenDatabaseIsNotNill() {
+//
+//        fillRecipeBook(recipe: recipeBook)
+//        XCTAssertTrue(coreDataStack.saveOrUpdate(instance: recipeBook))
+//
+//    }
+//
+//
+//    func testGivenEmptyDatabase_WhenAddingEntity_ThenDatabasCountEqualOne() {
+//
+//        fillRecipeBook(recipe: recipeBook)
+//        coreDataStack.saveContext()
+//        print("On est la \(RecipeBook.all.count)")
+//        XCTAssertTrue(RecipeBook.all.count == 2)
+//    }
+//
+//}

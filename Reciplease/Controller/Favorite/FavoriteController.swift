@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoriteController: UIViewController {
     
     // MARK: - Variables
     
-    private var recipes = RecipeBook.all
+    private var recipes: [RecipeBook] = []
+    var managedObjectContext: NSManagedObjectContext?
+    var coreDataStack: CoreDataStack?
     
     // MARK: - Outlets
     
@@ -24,10 +27,12 @@ class FavoriteController: UIViewController {
         super.viewDidLoad()
         setupBackground()
         setupDelegate()
+        setupRecipeService()
+        setupCoreDataStack()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        recipes = RecipeBook.all
+        recipes = RecipeBook
         tableView.reloadData()
     }
     
@@ -41,6 +46,21 @@ class FavoriteController: UIViewController {
     }
     
     // MARK: - Private
+    
+    private func setupCoreDataStack() {
+        self.managedObjectContext = AppDelegate.mainContext
+        self.coreDataStack = AppDelegate.stack
+    }
+    
+    private func setupRecipeService() {
+        guard let managedObjectContext = self.managedObjectContext,
+            let coreDataStack = self.coreDataStack
+            else {
+                print("la configuration de la stack marche pas")
+                return
+        }
+        recipeService = RecipeService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
+    }
     
     /// Setup the background of the viewcontroller
     private func setupBackground() {

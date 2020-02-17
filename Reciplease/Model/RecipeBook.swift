@@ -12,9 +12,9 @@ import CoreData
 class RecipeBook: NSManagedObject {
     
     /// Returns an array of all the RecipeBook object in core data
-    static var all: [RecipeBook] {
+    static func all(moc: NSManagedObjectContext) -> [RecipeBook] {
         let request: NSFetchRequest<RecipeBook> = RecipeBook.fetchRequest()
-        guard let recipes = try? DatabaseManager.shared.managedObjectContext().fetch(request) else { return [] }
+        guard let recipes = try? AppDelegate.mainContext.fetch(request) else { return [] }
         return recipes
     }
     
@@ -30,7 +30,7 @@ class RecipeBook: NSManagedObject {
             Ingredients.createIngredientObject(ingredient: ingredient, recipeBook: favRecipe)
         }
         do {
-            try DatabaseManager.shared.managedObjectContext().save()
+            try AppDelegate.mainContext.save()
         } catch {
             print(error.localizedDescription)
         }
@@ -38,7 +38,7 @@ class RecipeBook: NSManagedObject {
     
     /// Returns a tuple containing the recipeBook object from core data and a boolean if there is a duplicated object
     static func checkFav(uri: String) -> (dup: Bool, recipe: RecipeBook?) {
-        let recipeBook = RecipeBook.all
+        let recipeBook = RecipeBook.all(moc: AppDelegate.mainContext)
         
         for recipe in recipeBook {
             if recipe.uri == uri {
