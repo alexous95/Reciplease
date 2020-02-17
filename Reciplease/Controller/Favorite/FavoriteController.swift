@@ -14,8 +14,11 @@ class FavoriteController: UIViewController {
     // MARK: - Variables
     
     private var recipes: [RecipeBook] = []
+    
+    // The variables below are used for core data
     var managedObjectContext: NSManagedObjectContext?
     var coreDataStack: CoreDataStack?
+    var recipeService: RecipeService?
     
     // MARK: - Outlets
     
@@ -27,12 +30,17 @@ class FavoriteController: UIViewController {
         super.viewDidLoad()
         setupBackground()
         setupDelegate()
-        setupRecipeService()
         setupCoreDataStack()
+        setupRecipeService()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        recipes = RecipeBook
+        guard let managedObjectContext = self.managedObjectContext else {
+                print("la configuration de la stack marche pas")
+                return
+        }
+        
+        recipes = RecipeBook.all(moc: managedObjectContext)
         tableView.reloadData()
     }
     
@@ -104,6 +112,9 @@ extension FavoriteController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
+        // Here we transform our set of ingredients (they are the objects who are linked to our recipe in core data) into an array of
+        // ingredients
+        
         let listIngredient = recipe.listIngredients?.allObjects as! [Ingredients]
         cell.configureFromCoreData(title: title, ingredients: listIngredient, image: image)
         
@@ -113,10 +124,12 @@ extension FavoriteController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
+            guard let managedObjectContext = self.managedObjectContext else { return }
+            
             // How to remove an object from core data
-            DatabaseManager.shared.managedObjectContext().delete(recipes[indexPath.row])
+            managedObjectContext.delete(recipes[indexPath.row])
             do {
-                try DatabaseManager.shared.managedObjectContext().save()
+                try managedObjectContext.save()
             } catch {
                 print(error.localizedDescription)
             }
