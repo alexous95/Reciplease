@@ -16,8 +16,8 @@ class FavoriteController: UIViewController {
     private var recipes: [RecipeBook] = []
     
     // The variables below are used for core data
-    var managedObjectContext: NSManagedObjectContext?
-    var coreDataStack: CoreDataStack?
+    var managedObjectContext: NSManagedObjectContext = AppDelegate.mainContext
+    var coreDataStack: CoreDataStack = AppDelegate.stack
     var recipeService: RecipeService?
     
     // MARK: - Outlets
@@ -30,17 +30,12 @@ class FavoriteController: UIViewController {
         super.viewDidLoad()
         setupBackground()
         setupDelegate()
-        setupCoreDataStack()
+        //setupCoreDataStack()
         setupRecipeService()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard let managedObjectContext = self.managedObjectContext else {
-                print("la configuration de la stack marche pas")
-                return
-        }
-        
-        recipes = RecipeBook.all(moc: managedObjectContext)
+        recipes = RecipeBook.all(managedObjectContext: managedObjectContext)
         tableView.reloadData()
     }
     
@@ -55,18 +50,12 @@ class FavoriteController: UIViewController {
     
     // MARK: - Private
     
-    private func setupCoreDataStack() {
-        self.managedObjectContext = AppDelegate.mainContext
-        self.coreDataStack = AppDelegate.stack
-    }
+//    private func setupCoreDataStack() {
+//        self.managedObjectContext = AppDelegate.mainContext
+//        self.coreDataStack = AppDelegate.stack
+//    }
     
     private func setupRecipeService() {
-        guard let managedObjectContext = self.managedObjectContext,
-            let coreDataStack = self.coreDataStack
-            else {
-                print("la configuration de la stack marche pas")
-                return
-        }
         recipeService = RecipeService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
     }
     
@@ -123,8 +112,6 @@ extension FavoriteController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
-            guard let managedObjectContext = self.managedObjectContext else { return }
             
             // How to remove an object from core data
             managedObjectContext.delete(recipes[indexPath.row])

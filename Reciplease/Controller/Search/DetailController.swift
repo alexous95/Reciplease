@@ -21,19 +21,19 @@ class DetailController: UIViewController {
     
     var recipe: Recipe?
     var isFavorite = false
-    var managedObjectContext: NSManagedObjectContext?
-    var coreDataStack: CoreDataStack?
+    var managedObjectContext: NSManagedObjectContext = AppDelegate.mainContext
+    var coreDataStack: CoreDataStack = AppDelegate.stack
     var recipeService: RecipeService?
     
     // MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRecipeService()
         setupBackground()
         setup()
         checkFavorite()
-        setupCoreDataStack()
-        setupRecipeService()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,18 +46,7 @@ class DetailController: UIViewController {
     
     // MARK: - Private
     
-    private func setupCoreDataStack() {
-        self.managedObjectContext = AppDelegate.mainContext
-        self.coreDataStack = AppDelegate.stack
-    }
-    
     private func setupRecipeService() {
-        guard let managedObjectContext = self.managedObjectContext,
-            let coreDataStack = self.coreDataStack
-        else {
-            print("la configuration de la stack marche pas")
-            return
-        }
         recipeService = RecipeService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
     }
     
@@ -130,9 +119,9 @@ class DetailController: UIViewController {
             let favoriteRecipe = recipeService.checkFav(uri: uri)
             guard let favRecipe = favoriteRecipe.recipe else { return }
             
-            AppDelegate.mainContext.delete(favRecipe)
+            managedObjectContext.delete(favRecipe)
             do {
-                try AppDelegate.mainContext.save()
+                try managedObjectContext.save()
             } catch {
                 print(error.localizedDescription)
             }

@@ -37,7 +37,7 @@ public final class RecipeService {
     
     /// Returns a tuple containing the recipeBook object from core data and a boolean if there is a duplicated object
     func checkFav(uri: String) -> (dup: Bool, recipe: RecipeBook?) {
-        let recipeBook = RecipeBook.all(moc: managedObjectContext)
+        let recipeBook = RecipeBook.all(managedObjectContext: managedObjectContext)
         
         for recipe in recipeBook {
             if recipe.uri == uri {

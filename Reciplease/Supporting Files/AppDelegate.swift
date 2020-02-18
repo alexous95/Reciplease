@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let coreDataStack = CoreDataStack(modelName: "Reciplease")
     
     static var mainContext: NSManagedObjectContext {
-        return (UIApplication.shared.delegate as! AppDelegate).coreDataStack.managedContext
+        return (UIApplication.shared.delegate as! AppDelegate).coreDataStack.mainContext
     }
     
     static var stack: CoreDataStack {

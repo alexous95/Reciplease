@@ -19,6 +19,10 @@ class TestCoreDataStack: CoreDataStack {
     override init(modelName: String) {
         super.init(modelName: modelName)
         
+        /// Redirects the `NSPersistentStoreCoordinator` to memory.
+        ///
+        /// Here is all the magic happening. The `NSPersistentStoreCoordinator` is
+        /// redirected to memory instead of SQLite.
         let persistentStoreDescription = NSPersistentStoreDescription()
         persistentStoreDescription.type = NSInMemoryStoreType
         

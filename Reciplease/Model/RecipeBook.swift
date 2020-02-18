@@ -12,9 +12,9 @@ import CoreData
 class RecipeBook: NSManagedObject {
     
     /// Returns an array of all the RecipeBook object in core data
-    static func all(moc: NSManagedObjectContext) -> [RecipeBook] {
+    static func all(managedObjectContext: NSManagedObjectContext) -> [RecipeBook] {
         let request: NSFetchRequest<RecipeBook> = RecipeBook.fetchRequest()
-        guard let recipes = try? AppDelegate.mainContext.fetch(request) else { return [] }
+        guard let recipes = try? managedObjectContext.fetch(request) else { return [] }
         return recipes
     }
     
