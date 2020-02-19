@@ -213,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				FA6F4CA223D72F77008954DB /* Reciplease.xcdatamodeld */,
-				FA39CC5623E86375005CEDE0 /* RecipeManager.swift */,
 				FA256F5D23E9CA65000EB773 /* Recipe.swift */,
 				FA05066023EF06AD00AAB4B9 /* RecipeBook.swift */,
 				FA05066223EF06D900AAB4B9 /* Ingredients.swift */,
@@ -238,6 +237,7 @@
 				FAAEEEB123FA9A08004A3D02 /* CoreDataStack.swift */,
 				FAAEEEB623FAADCC004A3D02 /* RecipeService.swift */,
 				FAAEEEB823FAB1DE004A3D02 /* IngredientsService.swift */,
+				FA39CC5623E86375005CEDE0 /* RecipeManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

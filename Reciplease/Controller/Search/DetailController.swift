@@ -33,7 +33,6 @@ class DetailController: UIViewController {
         setupBackground()
         setup()
         checkFavorite()
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

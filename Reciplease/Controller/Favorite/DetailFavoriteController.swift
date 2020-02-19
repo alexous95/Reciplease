@@ -33,6 +33,14 @@ class DetailFavoriteController: UIViewController {
         setupBackground()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "directionFavoriteSegue" {
+            let destVC: DirectionsController = segue.destination as! DirectionsController
+            guard let recipe = recipe else { return }
+            destVC.directions = recipe.url
+        }
+    }
+    
     // MARK: - Private
     
     private func setupCoreDataStack() {

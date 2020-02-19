@@ -10,10 +10,11 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="totalTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uri" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
         <relationship name="listIngredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingredients" inverseName="belongingRecipe" inverseEntity="Ingredients"/>
     </entity>
     <elements>
         <element name="Ingredients" positionX="256.4453125" positionY="106.19921875" width="128" height="88"/>
-        <element name="RecipeBook" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="RecipeBook" positionX="-63" positionY="-18" width="128" height="133"/>
     </elements>
 </model>

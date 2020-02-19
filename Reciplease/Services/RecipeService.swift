@@ -29,6 +29,7 @@ public final class RecipeService {
         favRecipe.uri = recipe.uri
         favRecipe.image = recipe.image
         favRecipe.title = recipe.label
+        favRecipe.url = recipe.url
         for ingredient in ingredients {
             ingredientService.addIngredient(ingredient, recipeBook: favRecipe)
         }

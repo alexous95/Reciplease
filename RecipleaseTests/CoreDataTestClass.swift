@@ -20,7 +20,7 @@ class CoreDataTestClass: XCTestCase {
         recipe.title = "\(number)"
         recipe.totalTime = 0
         recipe.uri = "\(number)"
-        
+        recipe.url = "\(number)"
         return recipe
     }
     
@@ -57,6 +57,7 @@ class CoreDataTestClass: XCTestCase {
         recipe.title = ""
         recipe.totalTime = 0
         recipe.uri = ""
+        recipe.url = ""
         
         // Then
         XCTAssertNotNil(recipe, "Recipe should not be nil")
@@ -64,7 +65,7 @@ class CoreDataTestClass: XCTestCase {
         XCTAssertTrue(recipe.title == "")
         XCTAssertTrue(recipe.totalTime == 0)
         XCTAssertTrue(recipe.uri == "")
-        
+        XCTAssertTrue(recipe.url == "")
     }
     
     func testGivenEmptyDataBase_WhenAddingRecipeBook_ThenDatabaseIsNotEmpty() {
@@ -75,6 +76,7 @@ class CoreDataTestClass: XCTestCase {
         recipe.title = ""
         recipe.totalTime = 0
         recipe.uri = ""
+        recipe.url = ""
         
         // When
         recipeService.coreDataStack.saveContext()
@@ -159,6 +161,7 @@ class CoreDataTestClass: XCTestCase {
         XCTAssertTrue(recipes[0].image == "1")
         XCTAssertTrue(recipes[0].title == "1")
         XCTAssertTrue(recipes[0].uri == "1")
+        XCTAssertTrue(recipes[0].url == "1")
         
         let ingredientsList = Ingredients.ingredientsFor(recipe: recipes[0], managedObjectContext: recipeService.managedObjectContext)
         

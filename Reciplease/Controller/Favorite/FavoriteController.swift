@@ -50,11 +50,6 @@ class FavoriteController: UIViewController {
     
     // MARK: - Private
     
-//    private func setupCoreDataStack() {
-//        self.managedObjectContext = AppDelegate.mainContext
-//        self.coreDataStack = AppDelegate.stack
-//    }
-    
     private func setupRecipeService() {
         recipeService = RecipeService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
     }

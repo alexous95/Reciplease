@@ -11,7 +11,9 @@
         <scene sceneID="xdr-0U-AL5">
             <objects>
                 <navigationController id="ZdR-X8-ApV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="BbI-JQ-0vh"/>
+                    <tabBarItem key="tabBarItem" title="Search" id="BbI-JQ-0vh">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="9Wc-ok-VWw">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -124,7 +126,9 @@
         <scene sceneID="eUk-qf-bAY">
             <objects>
                 <navigationController id="9Ot-Gm-gjz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorite" id="DcQ-of-mZg"/>
+                    <tabBarItem key="tabBarItem" title="Favorite" id="DcQ-of-mZg">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="Flg-ID-ZhG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -149,7 +153,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Kzz-lz-4Wp">
                                 <rect key="frame" x="10" y="128" width="394" height="34"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ingredients? " borderStyle="roundedRect" placeholder="Ingredient" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mTp-Ul-jNM">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="What's in your fridge ?" borderStyle="roundedRect" placeholder="Ingredient" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mTp-Ul-jNM">
                                         <rect key="frame" x="0.0" y="0.0" width="285.5" height="34"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -185,7 +189,7 @@
                                 <rect key="frame" x="72.5" y="710.5" width="269" height="62.5"/>
                                 <color key="backgroundColor" red="0.095801420509815216" green="0.58598506450653076" blue="0.11407060176134109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Search Recipe">
+                                <state key="normal" title="Search For Recipes">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -249,7 +253,7 @@
             </objects>
             <point key="canvasLocation" x="740.57971014492762" y="-419.19642857142856"/>
         </scene>
-        <!--Result Controller-->
+        <!--Reciplease-->
         <scene sceneID="nLP-vI-rGg">
             <objects>
                 <viewController id="gKf-LW-LsA" customClass="ResultController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -329,7 +333,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vti-Pn-qAY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="61P-mD-Iu2"/>
+                    <navigationItem key="navigationItem" title="Reciplease" id="61P-mD-Iu2">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Z6k-mP-RMd"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="FIJ-gW-BUs" id="AbI-8O-W3E"/>
                     </connections>
@@ -411,7 +417,7 @@
             </objects>
             <point key="canvasLocation" x="1889.8550724637682" y="-419.19642857142856"/>
         </scene>
-        <!--Detail Controller-->
+        <!--Reciplease-->
         <scene sceneID="bka-dh-lkm">
             <objects>
                 <viewController id="lvp-gN-8XA" customClass="DetailController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -446,13 +452,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKd-3c-vA6">
-                                <rect key="frame" x="10" y="367" width="133.5" height="25.5"/>
-                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="20"/>
+                                <rect key="frame" x="10" y="367" width="147" height="28"/>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="w1l-vE-oHY">
-                                <rect key="frame" x="0.0" y="397.5" width="414" height="375"/>
+                                <rect key="frame" x="0.0" y="400" width="414" height="375"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1F-cH-yne">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="308.5"/>
@@ -497,7 +503,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hrx-bI-zgI"/>
                     </view>
-                    <navigationItem key="navigationItem" id="sNh-9y-yMj">
+                    <navigationItem key="navigationItem" title="Reciplease" id="sNh-9y-yMj">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="XnB-BP-GbW"/>
                         <barButtonItem key="rightBarButtonItem" image="Unselected" id="KYe-BC-QwO">
                             <connections>
                                 <action selector="makeFavorite" destination="lvp-gN-8XA" id="DgD-C1-n1E"/>
@@ -515,7 +522,7 @@
             </objects>
             <point key="canvasLocation" x="2837.68115942029" y="-419.19642857142856"/>
         </scene>
-        <!--Directions Controller-->
+        <!--Reciplease-->
         <scene sceneID="m7A-a2-af8">
             <objects>
                 <viewController id="PxO-gd-YVZ" customClass="DirectionsController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -541,7 +548,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kvy-4q-UAi"/>
                     </view>
-                    <navigationItem key="navigationItem" id="7Lg-Xg-bM3"/>
+                    <navigationItem key="navigationItem" title="Reciplease" id="7Lg-Xg-bM3"/>
                     <connections>
                         <outlet property="webView" destination="4xJ-04-jhb" id="kfb-zC-30X"/>
                     </connections>
@@ -561,6 +568,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="ZdR-X8-ApV" kind="relationship" relationship="viewControllers" id="8M9-PD-pcF"/>
@@ -606,19 +614,19 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbb-Pi-IBH">
-                                <rect key="frame" x="10" y="367" width="102" height="25.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="10" y="367" width="147" height="28"/>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AIY-7F-Bbg">
-                                <rect key="frame" x="0.0" y="397.5" width="414" height="375"/>
+                                <rect key="frame" x="0.0" y="400" width="414" height="375"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaH-04-cno">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="308.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMN-XQ-yrK">
@@ -628,6 +636,9 @@
                                         <state key="normal" title="Get directions">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="PxO-gd-YVZ" kind="show" identifier="directionFavoriteSegue" id="zfp-RP-isD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -670,4 +681,7 @@
         <image name="TransparentColor" width="0.5" height="0.5"/>
         <image name="Unselected" width="75" height="75"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="zfp-RP-isD"/>
+    </inferredMetricsTieBreakers>
 </document>
