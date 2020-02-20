@@ -32,7 +32,7 @@
             </objects>
             <point key="canvasLocation" x="-112" y="-419"/>
         </scene>
-        <!--favorite-->
+        <!--Reciplease-->
         <scene sceneID="vrs-Sk-SB8">
             <objects>
                 <viewController id="IVb-Js-o60" customClass="FavoriteController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -113,14 +113,16 @@
                         <viewLayoutGuide key="safeArea" id="npR-UB-xcR"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="favorite" id="QgI-x1-tMn"/>
-                    <navigationItem key="navigationItem" id="Ggt-cK-rfz"/>
+                    <navigationItem key="navigationItem" title="Reciplease" id="Ggt-cK-rfz">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="322-d5-zv5"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="0Yx-Kc-9cl" id="Uu6-Rd-efB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rkx-Hb-ets" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="742" y="230"/>
+            <point key="canvasLocation" x="741" y="327"/>
         </scene>
         <!--Favorite-->
         <scene sceneID="eUk-qf-bAY">
@@ -132,7 +134,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="Flg-ID-ZhG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="IVb-Js-o60" kind="relationship" relationship="rootViewController" id="eLO-wB-EqV"/>
@@ -140,7 +147,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGY-Ue-UDL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-113" y="230"/>
+            <point key="canvasLocation" x="-113" y="327"/>
         </scene>
         <!--Reciplease-->
         <scene sceneID="EGq-B2-eXr">
@@ -193,7 +200,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="gKf-LW-LsA" kind="show" identifier="searchResultSegue" id="S9j-25-9M3"/>
+                                    <segue destination="gKf-LW-LsA" kind="show" identifier="searchResultSegue" id="KEq-vN-hkZ"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9mZ-uf-q3q">
@@ -247,6 +254,7 @@
                         <outlet property="clearButton" destination="BYB-LY-ldb" id="Ayg-bg-n2A"/>
                         <outlet property="list" destination="rEC-UL-4GY" id="lYS-Xz-0yh"/>
                         <outlet property="listTF" destination="mTp-Ul-jNM" id="hBo-14-zuV"/>
+                        <outlet property="searchButton" destination="uli-Zv-Bie" id="RtF-0N-aWz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTI-zc-RHR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -464,7 +472,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="308.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djq-XM-RMz">
@@ -534,7 +542,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" video="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
@@ -555,7 +563,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mzH-7Y-aaU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3773" y="-420"/>
+            <point key="canvasLocation" x="2838" y="327"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="mNb-N4-Y4S">
@@ -626,7 +634,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="308.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMN-XQ-yrK">
@@ -674,7 +682,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MnF-Ol-hli" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1890" y="230"/>
+            <point key="canvasLocation" x="1890" y="327"/>
         </scene>
     </scenes>
     <resources>

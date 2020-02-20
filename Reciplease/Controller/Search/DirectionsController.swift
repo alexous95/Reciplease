@@ -17,6 +17,7 @@ class DirectionsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackground()
        loadDirections()
     }
   
@@ -25,7 +26,17 @@ class DirectionsController: UIViewController {
         webView.configuration.mediaTypesRequiringUserActionForPlayback = .all
         webView.configuration.allowsInlineMediaPlayback = false
         webView.load(direction)
+    }
+    
+    /// Setup for the background view
+    private func setupBackground() {
+        guard let startColor = UIColor(named: "StartBackground") else { return }
+        guard let endColor = UIColor(named: "EndBackground") else { return }
+        let gradient = CAGradientLayer()
         
+        gradient.frame = view.bounds
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
     }
     
 }

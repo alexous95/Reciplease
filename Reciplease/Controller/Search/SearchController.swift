@@ -9,12 +9,13 @@
 import UIKit
 
 class SearchController: UIViewController {
-
+    
     // MARK: - Outlets
     
     @IBOutlet weak var listTF: UITextField!
     @IBOutlet weak var list: UITextView!
     @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     
     // MARK: - Variables
     
@@ -35,7 +36,7 @@ class SearchController: UIViewController {
             destVC.arrayList = arrayList
         }
     }
-
+    
     // MARK: - Private
     
     /// Setup for the background view
