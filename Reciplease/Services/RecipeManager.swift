@@ -16,11 +16,11 @@ final class RecipeManager {
     
     // MARK: - Private
     
-    private func createUrl(foodList: [String]) -> URL {
+    private func createUrl(foodList: [String], from: Int, to: Int) -> URL {
         let baseUrl = "https://api.edamam.com/search?q="
         let parameters = foodList.joined(separator: ",")
         let identification = "&app_id=\(APIKey.edamamAppId)&app_key=\(APIKey.edamamKey)"
-        let range = "&from=0&to=20"
+        let range = "&from=\(from)&to=\(to)"
         
         let url = URL(string: baseUrl + parameters + identification + range)!
         
@@ -32,8 +32,8 @@ final class RecipeManager {
     /// Launch a request to the edamam API with some parameters
     /// - Parameter foodList: An array of the ingredient we want in our Recipe
     /// - Parameter completion: A closure of type (Hits?, Bool) -> () to transmit data
-    func launchRequest(foodList: [String], completion: @escaping recipeHandler) {
-        let url = createUrl(foodList: foodList)
+    func launchRequest(foodList: [String], from: Int, to: Int, completion: @escaping recipeHandler) {
+        let url = createUrl(foodList: foodList, from: from, to: to)
         
         // We use the alamofire request methode to get our information
         // We use the validate methode to insure that our httpresponse code is between 200 and 299

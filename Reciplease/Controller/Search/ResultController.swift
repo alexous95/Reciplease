@@ -14,7 +14,8 @@ class ResultController: UIViewController {
     
     var hits: Hits?
     var arrayList: [String] = []
-    
+    var start = 0
+    var end = 30
     // MARK: - Outlet
     
     @IBOutlet weak var tableView: UITableView!
@@ -25,7 +26,7 @@ class ResultController: UIViewController {
         super.viewDidLoad()
         setupBackground()
         setupDelegate()
-        getRecipe()
+        getRecipe(start: start, end: end)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -43,11 +44,22 @@ class ResultController: UIViewController {
         tableView.dataSource = self
     }
     
-    private func getRecipe() {
-        RecipeManager().launchRequest(foodList: arrayList) { (recipe, success) in
+    /// Scroll to the top of the tableView
+    ///
+    /// We use it to scroll to the top of the tableview when we load more recipe
+    private func scrollToFirstRow() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+    }
+    
+    private func getRecipe(start: Int, end: Int) {
+        RecipeManager().launchRequest(foodList: arrayList, from: start, to: end) { (recipe, success) in
             if success {
                 self.hits = recipe
                 self.tableView.reloadData()
+                self.start = end
+                self.end += 30
+                self.scrollToFirstRow()
             } else {
                 debugPrint("Ca marche pas")
             }
@@ -62,6 +74,9 @@ class ResultController: UIViewController {
         gradient.frame = view.bounds
         gradient.colors = [startColor.cgColor, endColor.cgColor]
         view.layer.insertSublayer(gradient, at: 0)
+    }
+    @IBAction func loadMore(_ sender: Any) {
+        getRecipe(start: start, end: end)
     }
 }
 
