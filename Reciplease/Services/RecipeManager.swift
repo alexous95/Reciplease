@@ -20,8 +20,9 @@ final class RecipeManager {
         let baseUrl = "https://api.edamam.com/search?q="
         let parameters = foodList.joined(separator: ",")
         let identification = "&app_id=\(APIKey.edamamAppId)&app_key=\(APIKey.edamamKey)"
+        let range = "&from=0&to=20"
         
-        let url = URL(string: baseUrl + parameters + identification)!
+        let url = URL(string: baseUrl + parameters + identification + range)!
         
         return url
     }
