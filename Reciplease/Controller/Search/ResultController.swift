@@ -16,6 +16,7 @@ class ResultController: UIViewController {
     var arrayList: [String] = []
     var start = 0
     var end = 30
+    
     // MARK: - Outlet
     
     @IBOutlet weak var tableView: UITableView!
@@ -53,7 +54,7 @@ class ResultController: UIViewController {
     }
     
     private func getRecipe(start: Int, end: Int) {
-        RecipeManager().launchRequest(foodList: arrayList, from: start, to: end) { (recipe, success) in
+        RecipeManager().request(foodList: arrayList, from: start, to: end) { (recipe, success) in
             if success {
                 self.hits = recipe
                 self.tableView.reloadData()

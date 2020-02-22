@@ -32,7 +32,7 @@ final class RecipeManager {
     /// Launch a request to the edamam API with some parameters
     /// - Parameter foodList: An array of the ingredient we want in our Recipe
     /// - Parameter completion: A closure of type (Hits?, Bool) -> () to transmit data
-    func launchRequest(foodList: [String], from: Int, to: Int, completion: @escaping recipeHandler) {
+    func request(foodList: [String], from: Int, to: Int, completion: @escaping recipeHandler) {
         let url = createUrl(foodList: foodList, from: from, to: to)
         
         // We use the alamofire request methode to get our information

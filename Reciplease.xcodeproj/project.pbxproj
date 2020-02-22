@@ -33,6 +33,7 @@
 		FABCCE5C23F7027E008B977B /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCCE5B23F7027E008B977B /* APIKeys.swift */; };
 		FAD1312123EC06E400E55A04 /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1312023EC06E400E55A04 /* ResultController.swift */; };
 		FAD1312323EC175000E55A04 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1312223EC175000E55A04 /* ResultCell.swift */; };
+		FAE8FA1B240151B10098C56E /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE8FA1A240151B10098C56E /* NetworkProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		FABCCE5B23F7027E008B977B /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		FAD1312023EC06E400E55A04 /* ResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
 		FAD1312223EC175000E55A04 /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
+		FAE8FA1A240151B10098C56E /* NetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,12 +140,12 @@
 			path = Favorite;
 			sourceTree = "<group>";
 		};
-		FA41786223F2A6FC004A7360 /* Extension */ = {
+		FA41786223F2A6FC004A7360 /* Extension + Protocol */ = {
 			isa = PBXGroup;
 			children = (
 				FA41786323F2A730004A7360 /* WKWebViewExtension.swift */,
 			);
-			path = Extension;
+			path = "Extension + Protocol";
 			sourceTree = "<group>";
 		};
 		FA6F4C8D23D72F76008954DB = {
@@ -169,7 +171,7 @@
 		FA6F4C9823D72F77008954DB /* Reciplease */ = {
 			isa = PBXGroup;
 			children = (
-				FA41786223F2A6FC004A7360 /* Extension */,
+				FA41786223F2A6FC004A7360 /* Extension + Protocol */,
 				FA6F4CC123D7336C008954DB /* Supporting Files */,
 				FAAEEEB523FAAD7F004A3D02 /* Services */,
 				FA6F4CC023D7334C008954DB /* Model */,
@@ -238,6 +240,7 @@
 				FAAEEEB623FAADCC004A3D02 /* RecipeService.swift */,
 				FAAEEEB823FAB1DE004A3D02 /* IngredientsService.swift */,
 				FA39CC5623E86375005CEDE0 /* RecipeManager.swift */,
+				FAE8FA1A240151B10098C56E /* NetworkProtocol.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				FA6F4C9A23D72F77008954DB /* AppDelegate.swift in Sources */,
 				FAD1312123EC06E400E55A04 /* ResultController.swift in Sources */,
 				FAAEEEB923FAB1DE004A3D02 /* IngredientsService.swift in Sources */,
+				FAE8FA1B240151B10098C56E /* NetworkProtocol.swift in Sources */,
 				FAD1312323EC175000E55A04 /* ResultCell.swift in Sources */,
 				FA38647723EEC7DF0022B16F /* DirectionsController.swift in Sources */,
 				FA38647B23EEF7A30022B16F /* FavoriteController.swift in Sources */,
