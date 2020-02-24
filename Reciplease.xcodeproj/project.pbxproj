@@ -36,6 +36,7 @@
 		FAD1312123EC06E400E55A04 /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1312023EC06E400E55A04 /* ResultController.swift */; };
 		FAD1312323EC175000E55A04 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1312223EC175000E55A04 /* ResultCell.swift */; };
 		FAE8FA1B240151B10098C56E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE8FA1A240151B10098C56E /* NetworkService.swift */; };
+		FAF304B22403E2A70012A541 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF304B12403E2A70012A541 /* UIViewControllerExtension.swift */; };
 		FAFEE3B6240158D300F88D96 /* RecipeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFEE3B5240158D300F88D96 /* RecipeSession.swift */; };
 		FAFEE3BE2401708D00F88D96 /* RecipeManagerTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFEE3BD2401708D00F88D96 /* RecipeManagerTestClass.swift */; };
 		FAFEE3C02401715400F88D96 /* FakeResponseRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFEE3BF2401715400F88D96 /* FakeResponseRecipe.swift */; };
@@ -90,6 +91,7 @@
 		FAD1312023EC06E400E55A04 /* ResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
 		FAD1312223EC175000E55A04 /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
 		FAE8FA1A240151B10098C56E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		FAF304B12403E2A70012A541 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FAFEE3B5240158D300F88D96 /* RecipeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSession.swift; sourceTree = "<group>"; };
 		FAFEE3B9240167A900F88D96 /* FakeRecipeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRecipeSession.swift; sourceTree = "<group>"; };
 		FAFEE3BD2401708D00F88D96 /* RecipeManagerTestClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManagerTestClass.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				FA41786323F2A730004A7360 /* WKWebViewExtension.swift */,
+				FAF304B12403E2A70012A541 /* UIViewControllerExtension.swift */,
 			);
 			path = "Extension + Protocol";
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				FA41786423F2A730004A7360 /* WKWebViewExtension.swift in Sources */,
 				FA256F5C23E9BD17000EB773 /* SearchController.swift in Sources */,
 				FA6F4C9C23D72F77008954DB /* SceneDelegate.swift in Sources */,
+				FAF304B22403E2A70012A541 /* UIViewControllerExtension.swift in Sources */,
 				FAA0EF9323ED49F500497E67 /* DetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

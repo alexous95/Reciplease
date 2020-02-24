@@ -61,6 +61,10 @@ class SearchController: UIViewController {
     /// - Parameter sender: In this case it's a UIButton
     @IBAction func addToList(_ sender: Any) {
         guard let item = listTF.text else { return }
+        if item == "" || item == " " {
+            showAlert(title: "Oops", message: "You can't add an empty text", completion: nil)
+            return 
+        }
         list.text += "\t- " + item + "\n"
         arrayList.append(item)
         listTF.text = ""

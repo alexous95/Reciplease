@@ -51,6 +51,12 @@ class ResultController: UIViewController {
     /// We use it to scroll to the top of the tableview when we load more recipe
     private func scrollToFirstRow() {
         let indexPath = IndexPath(row: 0, section: 0)
+        guard let _ = tableView.cellForRow(at: indexPath) else {
+            showAlert(title: "Oops", message: "It seems there are no result.\n Try other ingredients") { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+            return
+        }
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
@@ -69,14 +75,9 @@ class ResultController: UIViewController {
             } else {
                 self.spinner.stopAnimating()
                 self.spinner.isHidden = true
-                
-                let alert = UIAlertController(title: "Oops", message: "Wait for a minute and retry due to API limitation", preferredStyle: .alert)
-                let action = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                self.showAlert(title: "Oops", message: "Wait for a minute and retry due to API limitation") { _ in
                     self.navigationController?.popViewController(animated: true)
                 }
-                
-                alert.addAction(action)
-                self.present(alert, animated: true)
             }
         }
     }
