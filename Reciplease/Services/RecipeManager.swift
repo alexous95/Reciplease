@@ -24,11 +24,17 @@ final class RecipeManager {
     
     static func createUrl(foodList: [String], from: Int, to: Int) -> URL {
         let baseUrl = "https://api.edamam.com/search?q="
-        let parameters = foodList.joined(separator: ",")
+        let parameters = foodList
+            .compactMap({ (food) -> String? in
+                return food.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            })
+            .joined(separator: ",")
         let identification = "&app_id=\(APIKey.edamamAppId)&app_key=\(APIKey.edamamKey)"
         let range = "&from=\(from)&to=\(to)"
         
-        let url = URL(string: baseUrl + parameters + identification + range)!
+        guard let url = URL(string: baseUrl + parameters + identification + range) else {
+            return URL(fileURLWithPath: "")
+        }
         
         return url
     }

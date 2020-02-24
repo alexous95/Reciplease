@@ -10,6 +10,10 @@ import Foundation
 import WebKit
 
 extension WKWebView {
+    
+    /// Load the url into the web view
+    ///
+    /// It is used to shorten the loading of an url
     func load(_ urlString: String) {
         if let url = URL(string: urlString) {
             let request = URLRequest(url: url)

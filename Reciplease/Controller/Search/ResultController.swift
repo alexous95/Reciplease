@@ -28,7 +28,8 @@ class ResultController: UIViewController {
         super.viewDidLoad()
         setupBackground()
         setupDelegate()
-        getRecipe(start: start, end: end)
+        setupSpinner()
+        loadRecipe(start: start, end: end)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,9 +42,15 @@ class ResultController: UIViewController {
     
     // MARK: - Private
     
+    /// Setup the delegates for the table view
     private func setupDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    /// Setup the spinner appearance on screen
+    private func setupSpinner() {
+        spinner.isHidden = true
     }
     
     /// Scroll to the top of the tableView
@@ -51,8 +58,10 @@ class ResultController: UIViewController {
     /// We use it to scroll to the top of the tableview when we load more recipe
     private func scrollToFirstRow() {
         let indexPath = IndexPath(row: 0, section: 0)
-        guard let _ = tableView.cellForRow(at: indexPath) else {
-            showAlert(title: "Oops", message: "It seems there are no result.\n Try other ingredients") { _ in
+        guard let hits = hits else { return }
+        guard let number = hits.hits?.count  else { return }
+        if number == 0 {
+            showAlert(title: "Oops", message: "There is no recipes") { _ in
                 self.navigationController?.popViewController(animated: true)
             }
             return
@@ -60,28 +69,46 @@ class ResultController: UIViewController {
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
-    private func getRecipe(start: Int, end: Int) {
-        spinner.isHidden = false
-        spinner.startAnimating()
+    /// Start/Stop animating the spinner according to its state
+    /// - Parameter state: The state of the spinner before the call of the function
+    private func toggleSpinner(state: Bool) {
+        if state {
+            spinner.isHidden = false
+            spinner.startAnimating()
+        } else {
+            spinner.isHidden = true
+            spinner.startAnimating()
+        }
+    }
+    
+    /// Load recipe from the edamam API and perform animations on the table view if needed
+    /// - Parameter start: First number of the range we want to load our recipes
+    /// - Parameter end: Last number of the range we want to load our recipe
+    ///
+    /// The range created is used to avoid long loading time. It's better to load 30 entries first and then
+    /// 30 other entries that 60 in one time.
+    ///
+    /// By default the start of the range is 0 and the end is 30
+    private func loadRecipe(start: Int, end: Int) {
+        toggleSpinner(state: spinner.isHidden)
         RecipeManager().launchRequest(foodList: arrayList, from: start, to: end) { (recipe, success) in
             if success {
                 self.hits = recipe
                 self.tableView.reloadData()
-                self.spinner.stopAnimating()
-                self.spinner.isHidden = true
+                self.toggleSpinner(state: self.spinner.isHidden)
                 self.start = end
                 self.end += 30
                 self.scrollToFirstRow()
             } else {
-                self.spinner.stopAnimating()
-                self.spinner.isHidden = true
+                self.toggleSpinner(state: self.spinner.isHidden)
                 self.showAlert(title: "Oops", message: "Wait for a minute and retry due to API limitation") { _ in
                     self.navigationController?.popViewController(animated: true)
                 }
             }
         }
     }
-    
+
+    /// Setup the background
     private func setupBackground() {
         guard let startColor = UIColor(named: "StartBackground") else { return }
         guard let endColor = UIColor(named: "EndBackground") else { return }
@@ -92,7 +119,7 @@ class ResultController: UIViewController {
         view.layer.insertSublayer(gradient, at: 0)
     }
     @IBAction func loadMore(_ sender: Any) {
-        getRecipe(start: start, end: end)
+        loadRecipe(start: start, end: end)
     }
 }
 
@@ -115,14 +142,14 @@ extension ResultController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
+        // Here we use several guard let to unwrap our optional for the configuration
+        
         guard let hits = hits else {
             return UITableViewCell()
         }
-        
         guard let title = hits.hits?[indexPath.row].recipe?.label else {
             return UITableViewCell()
         }
-        
         guard let ingredient = hits.hits?[indexPath.row].recipe?.ingredients else {
             return UITableViewCell()
         }

@@ -21,15 +21,19 @@ class DetailController: UIViewController {
     
     var recipe: Recipe?
     var isFavorite = false
-    var managedObjectContext: NSManagedObjectContext = AppDelegate.mainContext
-    var coreDataStack: CoreDataStack = AppDelegate.stack
-    var recipeService: RecipeService?
+    
+    // We use lazy variables to avoid an optional non optional value (We need that value so a lazy variable
+    // will instantiate it when we need to access it)
+    // If we don't access it we save memory
+    
+    let managedObjectContext: NSManagedObjectContext = AppDelegate.mainContext
+    let coreDataStack: CoreDataStack =  AppDelegate.stack
+    lazy var recipeService = RecipeService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
     
     // MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRecipeService()
         setupBackground()
         setup()
         checkFavorite()
@@ -44,11 +48,7 @@ class DetailController: UIViewController {
     }
     
     // MARK: - Private
-    
-    private func setupRecipeService() {
-        recipeService = RecipeService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
-    }
-    
+
     /// Setup for the background view
     private func setupBackground() {
         guard let startColor = UIColor(named: "StartBackground") else { return }
@@ -89,7 +89,6 @@ class DetailController: UIViewController {
     
     /// Checks if the recipe is already a favorite and sets the favorite button accordingly
     private func checkFavorite() {
-        guard let recipeService = recipeService else { return }
         guard let recipe = recipe else { return }
         guard let uri = recipe.uri else {
             return
@@ -109,7 +108,6 @@ class DetailController: UIViewController {
     
     /// Saves or removes a recipe from core data depending if it's already a favorite recipe or not
     @IBAction func makeFavorite() {
-        guard let recipeService = recipeService else { return }
         guard let recipe = recipe else { return }
         guard let uri = recipe.uri else { return }
         
