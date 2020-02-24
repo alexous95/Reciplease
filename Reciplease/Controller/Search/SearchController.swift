@@ -61,9 +61,7 @@ class SearchController: UIViewController {
     /// - Parameter sender: In this case it's a UIButton
     @IBAction func addToList(_ sender: Any) {
         
-        guard var item = listTF.text else { return }
-        //item = item.trimmingCharacters(in: .whitespaces)
-        //item = item.replacingOccurrences(of: " ", with: "")
+        guard let item = listTF.text else { return }
         if item == "" {
             showAlert(title: "Oops", message: "You can't add an empty text", completion: nil)
             return 
