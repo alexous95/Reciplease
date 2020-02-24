@@ -29,8 +29,7 @@ struct Recipe: Codable {
     let image: String?
     let url: String?
     let ingredients: [Ingredient]?
-    //let calories, totalWeight: Double?
-    let totalTime: Int?
+    let totalTime: Double?
 }
 
 // MARK: - Ingredient

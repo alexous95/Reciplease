@@ -14,9 +14,9 @@ final class RecipeManager {
     typealias dataHandler = (Data?, Bool) -> ()
     typealias recipeHandler = (Hits?, Bool) -> ()
     
-    private var recipeSession: RecipeSession
+    private var recipeSession: NetworkService
     
-    init(recipeSession: RecipeSession = RecipeSession()) {
+    init(recipeSession: NetworkService = RecipeSession()) {
         self.recipeSession = recipeSession
     }
     

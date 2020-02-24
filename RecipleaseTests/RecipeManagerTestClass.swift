@@ -22,6 +22,7 @@ class RecipeManagerTestClass: XCTestCase {
     
     let responseOK = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 200, httpVersion: nil, headerFields: [:])!
     let responseKO = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 500, httpVersion: nil, headerFields: [:])!
+    
     override func setUp() {
         fakeResponseRecipeOK = FakeResponseRecipe(response: responseOK)
         fakeRecipeSessionOK = FakeRecipeSession(fakeResponseRecipe: fakeResponseRecipeOK)
@@ -33,6 +34,17 @@ class RecipeManagerTestClass: XCTestCase {
         
     }
 
+    
+    func testGivenIngredientList_WhenCreatingUrl_ThenUrlIsCorrect() {
+        
+        let ingredient = ["chicken", "pasta", "egg"]
+        
+        let url = RecipeManager.createUrl(foodList: ingredient, from: 0, to: 2)
+        
+        XCTAssertTrue(url.absoluteString == "https://api.edamam.com/search?q=chicken,pasta,egg&app_id=ff830871&app_key=437dfce1cdcd0f8db5c6523943729449&from=0&to=2")
+        
+    }
+    
     func testGivenURL_WhenLoadingRecipe_ThenHttpResultIs200() {
         
         let expectation = XCTestExpectation(description: "Waiting for queue change")
@@ -119,8 +131,18 @@ class RecipeManagerTestClass: XCTestCase {
                 expectation.fulfill()
             }
         }
-        
     }
     
+    
+    func testGivenURL_WhenLoadingFail_ThenRecipeIsNil() {
+        
+        let expectation = XCTestExpectation(description: "Waiting for callback")
+        
+        recipeManagerKO.launchRequest(foodList: ["chicken"], from: 0, to: 2) { (hits, success) in
+            
+            XCTAssertNil(hits)
+            expectation.fulfill()
+        }
+    }
 
 }

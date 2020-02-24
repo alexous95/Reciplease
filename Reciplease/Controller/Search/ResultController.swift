@@ -20,6 +20,7 @@ class ResultController: UIViewController {
     // MARK: - Outlet
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // MARK: - View Life Cycle
     
@@ -54,15 +55,28 @@ class ResultController: UIViewController {
     }
     
     private func getRecipe(start: Int, end: Int) {
+        spinner.isHidden = false
+        spinner.startAnimating()
         RecipeManager().launchRequest(foodList: arrayList, from: start, to: end) { (recipe, success) in
             if success {
                 self.hits = recipe
                 self.tableView.reloadData()
+                self.spinner.stopAnimating()
+                self.spinner.isHidden = true
                 self.start = end
                 self.end += 30
                 self.scrollToFirstRow()
             } else {
-                debugPrint("Ca marche pas")
+                self.spinner.stopAnimating()
+                self.spinner.isHidden = true
+                
+                let alert = UIAlertController(title: "Oops", message: "Wait for a minute and retry due to API limitation", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+                alert.addAction(action)
+                self.present(alert, animated: true)
             }
         }
     }

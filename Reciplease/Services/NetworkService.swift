@@ -9,6 +9,10 @@
 import Foundation
 import Alamofire
 
+/// Requirements to make call to an API
+///
+/// All classes making API call must implement this protocol.
+/// This is useful to test our network call with a mock
 protocol NetworkService {
     func request(foodList: [String], from: Int, to: Int, completion: @escaping (DataResponse<Any, AFError>) -> Void)
 }

@@ -269,6 +269,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="18k-p0-11a">
+                                <rect key="frame" x="187" y="428" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ake-YH-I5Y"/>
+                                    <constraint firstAttribute="width" constant="40" id="qGS-GV-yqr"/>
+                                </constraints>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FIJ-gW-BUs">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -357,7 +366,9 @@
                         <constraints>
                             <constraint firstItem="FIJ-gW-BUs" firstAttribute="top" secondItem="Vti-Pn-qAY" secondAttribute="top" id="3jK-89-RZ9"/>
                             <constraint firstItem="FIJ-gW-BUs" firstAttribute="bottom" secondItem="Vti-Pn-qAY" secondAttribute="bottom" id="80I-GR-xgu"/>
+                            <constraint firstItem="18k-p0-11a" firstAttribute="centerX" secondItem="7jk-he-PDY" secondAttribute="centerX" id="Ojg-jh-iLZ"/>
                             <constraint firstItem="FIJ-gW-BUs" firstAttribute="trailing" secondItem="Vti-Pn-qAY" secondAttribute="trailing" id="Ok6-q1-GnL"/>
+                            <constraint firstItem="18k-p0-11a" firstAttribute="centerY" secondItem="7jk-he-PDY" secondAttribute="centerY" id="hQk-Uv-QOX"/>
                             <constraint firstItem="FIJ-gW-BUs" firstAttribute="leading" secondItem="Vti-Pn-qAY" secondAttribute="leading" id="uvH-Xg-DDa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vti-Pn-qAY"/>
@@ -366,6 +377,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="Z6k-mP-RMd"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="spinner" destination="18k-p0-11a" id="kng-vj-URB"/>
                         <outlet property="tableView" destination="FIJ-gW-BUs" id="AbI-8O-W3E"/>
                     </connections>
                 </viewController>
