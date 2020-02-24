@@ -54,7 +54,7 @@ class ResultController: UIViewController {
     }
     
     private func getRecipe(start: Int, end: Int) {
-        RecipeManager().request(foodList: arrayList, from: start, to: end) { (recipe, success) in
+        RecipeManager().launchRequest(foodList: arrayList, from: start, to: end) { (recipe, success) in
             if success {
                 self.hits = recipe
                 self.tableView.reloadData()

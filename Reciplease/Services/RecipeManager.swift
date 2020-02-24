@@ -11,12 +11,18 @@ import Alamofire
 
 final class RecipeManager {
     
-    typealias recipeHandler = (Hits?, Bool) -> ()
     typealias dataHandler = (Data?, Bool) -> ()
+    typealias recipeHandler = (Hits?, Bool) -> ()
+    
+    private var recipeSession: RecipeSession
+    
+    init(recipeSession: RecipeSession = RecipeSession()) {
+        self.recipeSession = recipeSession
+    }
     
     // MARK: - Private
     
-    private func createUrl(foodList: [String], from: Int, to: Int) -> URL {
+    static func createUrl(foodList: [String], from: Int, to: Int) -> URL {
         let baseUrl = "https://api.edamam.com/search?q="
         let parameters = foodList.joined(separator: ",")
         let identification = "&app_id=\(APIKey.edamamAppId)&app_key=\(APIKey.edamamKey)"
@@ -32,21 +38,25 @@ final class RecipeManager {
     /// Launch a request to the edamam API with some parameters
     /// - Parameter foodList: An array of the ingredient we want in our Recipe
     /// - Parameter completion: A closure of type (Hits?, Bool) -> () to transmit data
-    func request(foodList: [String], from: Int, to: Int, completion: @escaping recipeHandler) {
-        let url = createUrl(foodList: foodList, from: from, to: to)
-        
-        // We use the alamofire request methode to get our information
-        // We use the validate methode to insure that our httpresponse code is between 200 and 299
-        // We use the responsedecodable methode to use our model which conform to the decodable protocol
-        // The AFDataResponse<Hits> match the type of the model we want to use to decode our response
-        
-        AF.request(url, method: .get).validate().responseDecodable { (response: AFDataResponse<Hits>) in
-            guard let newResponse = try? response.result.get() else {
-                print(response.error?.errorDescription as Any)
+    func launchRequest(foodList: [String], from: Int, to: Int, completion: @escaping recipeHandler) {
+        recipeSession.request(foodList: foodList, from: from, to: to) { dataResponse in
+            guard dataResponse.response?.statusCode == 200 else {
                 completion(nil, false)
                 return
             }
-            completion(newResponse, true)
+            guard let data = dataResponse.data else {
+                completion(nil, false)
+                return
+            }
+            
+            do {
+                let hits = try JSONDecoder().decode(Hits.self, from: data)
+                completion(hits, true)
+            } catch {
+                print(error)
+                completion(nil, false)
+            }
+            
         }
     }
     

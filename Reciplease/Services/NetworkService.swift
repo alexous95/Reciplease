@@ -7,8 +7,8 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol NetworkService {
-    typealias recipeHandler = (Hits?, Bool) -> ()
-    func request(foodList: [String], from: Int, to: Int, completion: @escaping recipeHandler)
+    func request(foodList: [String], from: Int, to: Int, completion: @escaping (DataResponse<Any, AFError>) -> Void)
 }
