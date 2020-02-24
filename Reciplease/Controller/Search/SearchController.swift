@@ -60,8 +60,11 @@ class SearchController: UIViewController {
     /// Add ingredients query to an array and a textview
     /// - Parameter sender: In this case it's a UIButton
     @IBAction func addToList(_ sender: Any) {
-        guard let item = listTF.text else { return }
-        if item == "" || item == " " {
+        
+        guard var item = listTF.text else { return }
+        item = item.trimmingCharacters(in: .whitespaces)
+        item = item.replacingOccurrences(of: " ", with: "")
+        if item == "" {
             showAlert(title: "Oops", message: "You can't add an empty text", completion: nil)
             return 
         }
