@@ -13,7 +13,7 @@ import Alamofire
 
 class FakeRecipeSession: RecipeSession {
 
-    private let fakeResponseRecipe: FakeResponseRecipe
+    var fakeResponseRecipe: FakeResponseRecipe
     
     init(fakeResponseRecipe: FakeResponseRecipe) {
         self.fakeResponseRecipe = fakeResponseRecipe
@@ -22,10 +22,18 @@ class FakeRecipeSession: RecipeSession {
     override func request(foodList: [String], from: Int, to: Int, completion: @escaping (DataResponse<Any, AFError>) -> Void) {
         
         let result = Result<Any, AFError>.success("Hello")
-        let dataResponse = DataResponse(request: nil, response: fakeResponseRecipe.response, data: fakeResponseRecipe.exchangeCorrectData, metrics: nil, serializationDuration: 0.5, result: result )
+        let dataResponse = DataResponse(request: nil, response: fakeResponseRecipe.response, data: fakeResponseRecipe.data, metrics: nil, serializationDuration: 0.5, result: result )
         
         completion(dataResponse)
         
+    }
+    
+    override func requestImage(url: String, completion: @escaping (AFDataResponse<Data>) -> Void) {
+        let dummyData = "blabla".data(using: .utf8)
+        let result = Result<Data, AFError>.success(dummyData!)
+        let dataResponse = AFDataResponse(request: nil, response: fakeResponseRecipe.response, data: fakeResponseRecipe.data, metrics: nil, serializationDuration: 0.5, result: result)
+        
+        completion(dataResponse)
     }
 }
 

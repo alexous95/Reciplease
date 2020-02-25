@@ -15,4 +15,5 @@ import Alamofire
 /// This is useful to test our network call with a mock
 protocol NetworkService {
     func request(foodList: [String], from: Int, to: Int, completion: @escaping (DataResponse<Any, AFError>) -> Void)
+    func requestImage(url: String, completion: @escaping (AFDataResponse<Data>) -> Void)
 }

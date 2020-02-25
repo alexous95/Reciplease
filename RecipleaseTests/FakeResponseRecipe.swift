@@ -14,22 +14,12 @@ class FakeResponseRecipe {
     class RecipeError: Error {}
     static let error = RecipeError()
     
-    var response: HTTPURLResponse
+    var response: HTTPURLResponse?
+    var data: Data?
     
-    init(response: HTTPURLResponse) {
+    init(response: HTTPURLResponse? = nil, data: Data? = nil) {
         self.response = response
+        self.data = data
     }
    
-    // MARK: - Data
-    
-    var exchangeCorrectData: Data? {
-        // This variable is used to retrieve the bundle in which the class we are using is located
-        let bundle = Bundle(for: FakeResponseRecipe.self)
-        
-        // This variable is used to get the url of our test json file
-        let url = bundle.url(forResource: "Recipe", withExtension: "json")!
-        
-        // We retrieve the data inside the url
-        return try! Data(contentsOf: url)
-    }
 }

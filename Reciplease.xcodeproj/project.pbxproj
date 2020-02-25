@@ -18,6 +18,7 @@
 		FA38647723EEC7DF0022B16F /* DirectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA38647623EEC7DF0022B16F /* DirectionsController.swift */; };
 		FA38647B23EEF7A30022B16F /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA38647A23EEF7A30022B16F /* FavoriteController.swift */; };
 		FA39CC5723E86375005CEDE0 /* RecipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39CC5623E86375005CEDE0 /* RecipeManager.swift */; };
+		FA3C5E4D240513990067240B /* RecipeError.json in Resources */ = {isa = PBXBuildFile; fileRef = FA3C5E4C240513990067240B /* RecipeError.json */; };
 		FA41786423F2A730004A7360 /* WKWebViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA41786323F2A730004A7360 /* WKWebViewExtension.swift */; };
 		FA41786623F2B219004A7360 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA41786523F2B219004A7360 /* WebKit.framework */; };
 		FA6F4C9A23D72F77008954DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F4C9923D72F77008954DB /* AppDelegate.swift */; };
@@ -69,6 +70,7 @@
 		FA38647623EEC7DF0022B16F /* DirectionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsController.swift; sourceTree = "<group>"; };
 		FA38647A23EEF7A30022B16F /* FavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
 		FA39CC5623E86375005CEDE0 /* RecipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManager.swift; sourceTree = "<group>"; };
+		FA3C5E4C240513990067240B /* RecipeError.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RecipeError.json; sourceTree = "<group>"; };
 		FA41786323F2A730004A7360 /* WKWebViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewExtension.swift; sourceTree = "<group>"; };
 		FA41786523F2B219004A7360 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		FA6F4C9623D72F77008954DB /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +225,7 @@
 				FAFEE3BF2401715400F88D96 /* FakeResponseRecipe.swift */,
 				FAFEE3B9240167A900F88D96 /* FakeRecipeSession.swift */,
 				FAFEE3CA2403BA8C00F88D96 /* Recipe.json */,
+				FA3C5E4C240513990067240B /* RecipeError.json */,
 			);
 			path = RecipleaseTests;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA3C5E4D240513990067240B /* RecipeError.json in Resources */,
 				FAFEE3CB2403BA8C00F88D96 /* Recipe.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,80 +12,137 @@ import Alamofire
 
 class RecipeManagerTestClass: XCTestCase {
 
-    var recipeManagerOK: RecipeManager!
-    var fakeRecipeSessionOK: FakeRecipeSession!
-    var fakeResponseRecipeOK: FakeResponseRecipe!
+    var recipeManager: RecipeManager!
+    var fakeRecipeSession: FakeRecipeSession!
+    var correctData: Data {
+        // This variable is used to retrieve the bundle in which the class we are using is located
+        let bundle = Bundle(for: FakeResponseRecipe.self)
+        
+        // This variable is used to get the url of our test json file
+        let url = bundle.url(forResource: "Recipe", withExtension: "json")!
+        
+        // We retrieve the data inside the url
+        return try! Data(contentsOf: url)
+    }
     
-    var recipeManagerKO: RecipeManager!
-    var fakeRecipeSessionKO: FakeRecipeSession!
-    var fakeResponseRecipeKO: FakeResponseRecipe!
+    var errorData: Data {
+        let bundle = Bundle(for: FakeResponseRecipe.self)
+        let url = bundle.url(forResource: "RecipeError", withExtension: "json")!
+        return try! Data(contentsOf: url)
+    }
+    
+    var imageData = "10n".data(using: .utf8)
+    var imageErreur = "erreur".data(using: .utf8)
     
     let responseOK = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 200, httpVersion: nil, headerFields: [:])!
     let responseKO = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 500, httpVersion: nil, headerFields: [:])!
     
     override func setUp() {
-        fakeResponseRecipeOK = FakeResponseRecipe(response: responseOK)
-        fakeRecipeSessionOK = FakeRecipeSession(fakeResponseRecipe: fakeResponseRecipeOK)
-        recipeManagerOK = RecipeManager(recipeSession: fakeRecipeSessionOK)
-        
-        fakeResponseRecipeKO = FakeResponseRecipe(response: responseKO)
-        fakeRecipeSessionKO = FakeRecipeSession(fakeResponseRecipe: fakeResponseRecipeKO)
-        recipeManagerKO = RecipeManager(recipeSession: fakeRecipeSessionKO)
-        
+        fakeRecipeSession = FakeRecipeSession(fakeResponseRecipe: FakeResponseRecipe())
     }
 
+    override func tearDown() {
+        super.tearDown()
+        fakeRecipeSession = nil
+        recipeManager = nil
+    }
     
     func testGivenIngredientList_WhenCreatingUrl_ThenUrlIsCorrect() {
         
+        // Given
         let ingredient = ["chicken", "pasta", "egg"]
         
+        // When
+        recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
         let url = RecipeManager.createUrl(foodList: ingredient, from: 0, to: 2)
         
+        // Then
         XCTAssertTrue(url.absoluteString == "https://api.edamam.com/search?q=chicken,pasta,egg&app_id=ff830871&app_key=437dfce1cdcd0f8db5c6523943729449&from=0&to=2")
-        
     }
     
     func testGivenURL_WhenLoadingRecipe_ThenHttpResultIs200() {
         
-        let expectation = XCTestExpectation(description: "Waiting for queue change")
+        // Given
+        let expectation = XCTestExpectation(description: "Waiting for http response")
+        fakeRecipeSession.fakeResponseRecipe.response = responseOK
         
-        fakeRecipeSessionOK.request(foodList: ["chicken"], from: 0, to: 2) { (dataResponse) in
+        // When
+        fakeRecipeSession.request(foodList: ["chicken"], from: 0, to: 2) { (dataResponse) in
             
+            // Then
             XCTAssert(dataResponse.response?.statusCode == 200)
             expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 0.01)
     }
     
     
     func testGivenURL_WhenLoadingFail_ThenHttpResutIs500() {
         
+        // Given
         let expectation = XCTestExpectation(description: "Waiting for callback")
+        fakeRecipeSession.fakeResponseRecipe.response = responseKO
         
-        fakeRecipeSessionKO.request(foodList: ["chicken"], from: 0, to: 2) { (dataResponse) in
+        // When
+        fakeRecipeSession.request(foodList: ["chicken"], from: 0, to: 2) { (dataResponse) in
             
+            // Then
             XCTAssert(dataResponse.response?.statusCode == 500)
             expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 0.01)
     }
     
     func testGivenURl_WhenLoadingRecipe_ThenDataIsNotNil() {
         
+        // Given
         let expectation = XCTestExpectation(description: "Waiting for callback")
         
-        fakeRecipeSessionOK.request(foodList: ["chicken"], from: 0, to: 2) { (dataResponse) in
+        // When
+        fakeRecipeSession.fakeResponseRecipe.data = correctData
+        fakeRecipeSession.request(foodList: ["chicken"], from: 0, to: 2) { (dataResponse) in
             
-            XCTAssertNotNil(dataResponse.data)
+            guard let data = dataResponse.data else { return }
+            XCTAssertNotNil(data)
             expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    
+    func testGivenUrl_WhenLoadingRecipe_ThenDataIsNilIfNoData() {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Waiting for callback")
+        
+        // When
+        fakeRecipeSession.request(foodList: ["chicken"], from: 0, to: 2) { (dataResponse) in
+            
+            // Then
+            XCTAssert(dataResponse.data == nil)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 0.01)
     }
     
     
     func testGivenUrl_WhenLoadingRecipe_ThenResultIsRecipe() {
         
+        // Given
         let expectation = XCTestExpectation(description: "Waiting for callback")
         
-        recipeManagerOK.launchRequest(foodList: ["chicken"], from: 0, to: 2) { (hits, success) in
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseOK
+        fakeRecipeSession.fakeResponseRecipe.data = correctData
+        recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
+        
+        recipeManager.launchRequest(foodList: ["chicken"], from: 0, to: 2) { (hits, success) in
             
+            // Then
             if success {
                 XCTAssertTrue(hits?.count == 170158)
                 XCTAssertTrue(hits?.hits![0].recipe!.url == "http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html")
@@ -131,18 +188,183 @@ class RecipeManagerTestClass: XCTestCase {
                 expectation.fulfill()
             }
         }
+        
+        wait(for: [expectation], timeout: 0.01)
     }
     
     
-    func testGivenURL_WhenLoadingFail_ThenRecipeIsNil() {
+    func testGivenURL_WhenHttpStatusIs500_ThenRecipeIsNil() {
         
+        // Given
         let expectation = XCTestExpectation(description: "Waiting for callback")
         
-        recipeManagerKO.launchRequest(foodList: ["chicken"], from: 0, to: 2) { (hits, success) in
-            
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseKO
+        recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
+        
+        recipeManager.launchRequest(foodList: ["chicken"], from: 0, to: 2) { (hits, success) in
+        
+            // Then
             XCTAssertNil(hits)
             expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 0.01)
     }
+    
+    
+    func testGivenURL_WhenStatusIsOkAndNoData_ThenRecipeIsNil() {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Waiting for callback")
+        
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseOK
+        fakeRecipeSession.fakeResponseRecipe.data = nil
+        recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
+        
+        recipeManager.launchRequest(foodList: ["chicken"], from: 0, to: 2) { (hits, success) in
+            
+            // Then
+            XCTAssertNil(hits)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    
+    func testGivenURL_WhenDataStructNotOK_ThenRecipeIsNil() {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Waiting for callback")
+        
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseOK
+        fakeRecipeSession.fakeResponseRecipe.data = errorData
+        recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
+        
+        recipeManager.launchRequest(foodList: ["chicken"], from: 0, to: 2) { (hits, success) in
+            
+            // Then
+            XCTAssertNil(hits)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    // MARK: - Request Image Test
+    
+    
+    
+    func testGivenUrl_WhenLoadingImage_ThenStatusIs200() {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Waiting for callback")
+        
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseOK
+        fakeRecipeSession.fakeResponseRecipe.data = imageData
+        
+        fakeRecipeSession.requestImage(url: "") { (dataResponse) in
+            
+            // Then
+            XCTAssertEqual(dataResponse.response?.statusCode, 200)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 0.02)
+    }
+    
+    func testGivenUrl_WhenLoadingImage_ThenDataIsNotNil() {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Waiting for callback")
+        
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseOK
+        fakeRecipeSession.fakeResponseRecipe.data = imageData
+        
+        fakeRecipeSession.requestImage(url: "") { (dataResponse) in
+            
+            // Then
+            XCTAssertNotNil(dataResponse.data)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 0.02)
+    }
+    
+    
+    func testGivenURl_WhenLoadingImage_ThenResultIsImage() {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "waiting for callback")
+        
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseOK
+        fakeRecipeSession.fakeResponseRecipe.data = imageData
+        recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
+        
+        recipeManager.getImage(from: "") { (data, success) in
+            
+            // Then
+            
+            XCTAssertTrue(success)
+            XCTAssertNotNil(data)
+            
+            let dataFake = "10n".data(using: .utf8)!
+            
+            XCTAssertEqual(dataFake, data)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    func testGivenURl_WhenStatudIsNot200_ThenResultIsNil() {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "waiting for callback")
+        
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseKO
+        fakeRecipeSession.fakeResponseRecipe.data = imageData
+        recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
+        
+        recipeManager.getImage(from: "") { (data, success) in
+            
+            // Then
+            XCTAssertFalse(success)
+            XCTAssertNil(data)
+    
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    func testGivenURl_WhenNoData_ThenResultIsNil() {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "waiting for callback")
+        
+        // When
+        fakeRecipeSession.fakeResponseRecipe.response = responseOK
+        fakeRecipeSession.fakeResponseRecipe.data = nil
+        recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
+        
+        recipeManager.getImage(from: "") { (data, success) in
+            
+            // Then
+            XCTAssertFalse(success)
+            XCTAssertNil(data)
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
 
 }

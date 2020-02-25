@@ -70,15 +70,18 @@ final class RecipeManager {
     /// - Parameter url: An URL with the adress of our image
     /// - Parameter completion: A closure of type (Data?, Bool) -> () to transmit data
     func getImage(from url: String, completion: @escaping dataHandler) {
-        guard let url = URL(string: url) else { return }
-        
-        AF.request(url, method: .get).validate().responseData { response in
-            guard let newResponse = try? response.result.get() else {
-                print(response.error?.errorDescription as Any)
+        recipeSession.requestImage(url: url) { (data) in
+            guard data.response?.statusCode == 200 else {
                 completion(nil, false)
                 return
             }
-            completion(newResponse, true)
+            
+            guard let data = data.data else {
+                completion(nil, false)
+                return
+            }
+            
+            completion(data, true)
         }
     }
 }

@@ -22,5 +22,13 @@ class RecipeSession: NetworkService {
         }
     }
     
+    func requestImage(url: String, completion: @escaping (AFDataResponse<Data>) -> Void) {
+        guard let url = URL(string: url) else { return }
+        
+        AF.request(url).responseData { responseData in
+            completion(responseData)
+        }
+    }
+    
     
 }
