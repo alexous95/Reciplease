@@ -22,7 +22,7 @@ final class RecipeManager {
     
     // MARK: - Private
     
-    static func createUrl(foodList: [String], from: Int, to: Int) -> URL {
+    static func createUrl(foodList: [String], from: Int, to: Int) -> URL? {
         let baseUrl = "https://api.edamam.com/search?q="
         let parameters = foodList
             .compactMap({ (food) -> String? in
@@ -33,7 +33,7 @@ final class RecipeManager {
         let range = "&from=\(from)&to=\(to)"
         
         guard let url = URL(string: baseUrl + parameters + identification + range) else {
-            return URL(fileURLWithPath: "")
+            return URL(string: "")
         }
         
         return url

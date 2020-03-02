@@ -12,7 +12,9 @@ import Alamofire
 class RecipeSession: NetworkService {
     
     func request(foodList: [String], from: Int, to: Int, completion: @escaping (DataResponse<Any, AFError>) -> Void) {
-        let url = RecipeManager.createUrl(foodList: foodList, from: from, to: to)
+        guard let url = RecipeManager.createUrl(foodList: foodList, from: from, to: to) else {
+            return 
+        }
         
         // We use the responseJson methode to get a json file
         // The DataResponse<Any, AFError> match any type of the model we want to use to decode our response
