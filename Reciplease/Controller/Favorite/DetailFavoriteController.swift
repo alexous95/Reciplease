@@ -14,8 +14,7 @@ class DetailFavoriteController: UIViewController {
     // MARK: - Variables
     
     var recipe: RecipeBook?
-    var managedObjectContext: NSManagedObjectContext?
-    var coreDataStack: CoreDataStack?
+    var managedObjectContext: NSManagedObjectContext = AppDelegate.mainContext
     var recipeService: RecipeService?
     
     // MARK: - Outlet
@@ -28,7 +27,6 @@ class DetailFavoriteController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCoreDataStack()
         loadRecipe()
         setupBackground()
     }
@@ -42,15 +40,9 @@ class DetailFavoriteController: UIViewController {
     }
     
     // MARK: - Private
-    
-    private func setupCoreDataStack() {
-        self.managedObjectContext = AppDelegate.mainContext
-        self.coreDataStack = AppDelegate.stack
-    }
-    
+ 
     /// Load information from the recipe
     private func loadRecipe() {
-        guard let managedObjectContext = managedObjectContext else { return }
         guard let recipe = recipe else { return }
         guard let imageUrl = recipe.image else { return }
         let ingredients = Ingredients.ingredientsFor(recipe: recipe, managedObjectContext: managedObjectContext)

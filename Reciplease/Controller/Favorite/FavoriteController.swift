@@ -30,7 +30,6 @@ class FavoriteController: UIViewController {
         super.viewDidLoad()
         setupBackground()
         setupDelegate()
-        //setupCoreDataStack()
         setupRecipeService()
     }
     
