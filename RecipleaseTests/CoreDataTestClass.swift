@@ -29,6 +29,11 @@ class CoreDataTestClass: XCTestCase {
         return ingredient
     }
     
+    private func createIngredient(number: Int, weight: Double?) -> Ingredient {
+        let ingredient = Ingredient(text: "\(number)", weight: weight)
+        return ingredient
+    }
+    
     private func createDummyRecipe(number: Int) -> Recipe {
         let recipe = Recipe(uri: "\(number)", label: "\(number)", image: "\(number)", url: "\(number)", ingredients: nil, totalTime: 0)
         return recipe
@@ -124,6 +129,19 @@ class CoreDataTestClass: XCTestCase {
         XCTAssertTrue(listIngredient[0].belongingRecipe == recipeBook)
     }
     
+    
+    func testGivenRecipeBook_WhenCreatingIngredient_ThenWeightEquals0IfNotSpecified() {
+    
+        let recipeBook = createDummyRecipeBook(number: 1)
+        recipeService.coreDataStack.saveContext()
+        
+        let ingredient = createIngredient(number: 1, weight: nil)
+        ingredientService.addIngredient(ingredient, recipeBook: recipeBook)
+        
+        let listIngredient = recipeBook.listIngredients?.allObjects as! [Ingredients]
+        XCTAssertTrue(listIngredient[0].text == "1")
+        XCTAssertTrue(listIngredient[0].weight == 0.0)
+    }
     
     func testGivenRecipeBook_WhenAddingIngredient_ThenIngredientEqualsRecipeBookIngredient() {
         

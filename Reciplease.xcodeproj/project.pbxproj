@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A05D6BF5B8E3EF2A64EBB5D /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F48FF77C8845F733CB1E3B /* Pods_Reciplease.framework */; };
-		22C69F4B9766B18FF53A43D4 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFEE3C62401804B00F88D96 /* Pods_Reciplease.framework */; };
 		9B1C4EA88FB88ADF0B533942 /* Pods_RecipleaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71015379810A1B459528160E /* Pods_RecipleaseTests.framework */; };
 		FA05066123EF06AD00AAB4B9 /* RecipeBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA05066023EF06AD00AAB4B9 /* RecipeBook.swift */; };
 		FA05066323EF06D900AAB4B9 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA05066223EF06D900AAB4B9 /* Ingredients.swift */; };
@@ -112,7 +111,6 @@
 			files = (
 				FA41786623F2B219004A7360 /* WebKit.framework in Frameworks */,
 				0A05D6BF5B8E3EF2A64EBB5D /* Pods_Reciplease.framework in Frameworks */,
-				22C69F4B9766B18FF53A43D4 /* Pods_Reciplease.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
