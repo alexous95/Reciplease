@@ -14,6 +14,9 @@ class RecipeManagerTestClass: XCTestCase {
 
     var recipeManager: RecipeManager!
     var fakeRecipeSession: FakeRecipeSession!
+    
+    // This variable holds the data from the Recipe.json file in our bundle (The json with a correct format)
+    
     var correctData: Data {
         // This variable is used to retrieve the bundle in which the class we are using is located
         let bundle = Bundle(for: FakeResponseRecipe.self)
@@ -25,17 +28,23 @@ class RecipeManagerTestClass: XCTestCase {
         return try! Data(contentsOf: url)
     }
     
+    // This variable holds the data from the RecipeError.json file in our bundle (The json with an incorrect format)
+    
     var errorData: Data {
         let bundle = Bundle(for: FakeResponseRecipe.self)
         let url = bundle.url(forResource: "RecipeError", withExtension: "json")!
         return try! Data(contentsOf: url)
     }
     
+    // This two variable are used to simulate the data for the images
+    
     var imageData = "10n".data(using: .utf8)
     var imageErreur = "erreur".data(using: .utf8)
     
-    let responseOK = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 200, httpVersion: nil, headerFields: [:])!
-    let responseKO = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 500, httpVersion: nil, headerFields: [:])!
+    // This two response simulate a good and wrong http response from a server
+    
+    let responseOK = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 200, httpVersion: nil, headerFields: [:])
+    let responseKO = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 500, httpVersion: nil, headerFields: [:])
     
     override func setUp() {
         fakeRecipeSession = FakeRecipeSession(fakeResponseRecipe: FakeResponseRecipe())
@@ -54,7 +63,7 @@ class RecipeManagerTestClass: XCTestCase {
         
         // When
         recipeManager = RecipeManager(recipeSession: fakeRecipeSession)
-        let url = RecipeManager.createUrl(foodList: ingredient, from: 0, to: 2)
+        guard let url = RecipeManager.createUrl(foodList: ingredient, from: 0, to: 2) else { return }
         
         // Then
         XCTAssertTrue(url.absoluteString == "https://api.edamam.com/search?q=chicken,pasta,egg&app_id=ff830871&app_key=437dfce1cdcd0f8db5c6523943729449&from=0&to=2")
