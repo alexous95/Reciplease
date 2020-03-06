@@ -49,11 +49,12 @@ class FavoriteController: UIViewController {
     
     // MARK: - Private
     
+    /// Setsup the service class that will be used to fetch data from core data
     private func setupRecipeService() {
         recipeService = RecipeService(managedObjectContext: managedObjectContext, coreDataStack: coreDataStack)
     }
     
-    /// Setup the background of the viewcontroller
+    /// Setsup the background of the viewcontroller
     private func setupBackground() {
         guard let startColor = UIColor(named: "StartBackground") else { return }
         guard let endColor = UIColor(named: "EndBackground") else { return }

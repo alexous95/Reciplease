@@ -42,6 +42,8 @@ class DetailFavoriteController: UIViewController {
     // MARK: - Private
  
     /// Load information from the recipe
+    ///
+    /// We fetch our recipes from core data and we use the recipe manager class to get our image from a url
     private func loadRecipe() {
         guard let recipe = recipe else { return }
         guard let imageUrl = recipe.image else { return }
