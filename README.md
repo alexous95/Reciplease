@@ -6,7 +6,7 @@ This application offers you differents recipes with what you have in your fridge
 
 ### Fetches recipes
 
-This app uses a free API to fectch recipes from the internet. You enter a list of ingredient and the servers gives you the recipes.
+This app uses a free API to fectch recipes from the internet. You enter a list of ingredient and the server gives you the recipes.
 
 ### Local Storage
 
